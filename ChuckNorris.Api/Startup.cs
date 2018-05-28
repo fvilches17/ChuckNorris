@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using ChuckNorris.Api.Repositories;
+﻿using ChuckNorris.Api.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using NJsonSchema;
 using NSwag;
 using NSwag.AspNetCore;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace ChuckNorris.Api
 {
@@ -26,6 +26,7 @@ namespace ChuckNorris.Api
             services.AddDbContext<AppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IFactRepository, FactRepository>();
             services.AddMvc();
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppContext appContext)
@@ -34,6 +35,8 @@ namespace ChuckNorris.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder => builder.WithOrigins("*"));
 
             appContext.Database.Migrate();
             appContext.EnsureSeedForContext();
@@ -52,7 +55,7 @@ namespace ChuckNorris.Api
                 {
                     document.BasePath = "/";
                     document.Schemes = new List<SwaggerSchema> { SwaggerSchema.Http, SwaggerSchema.Https };
-                    document.Host = "localhost:5555";
+                    document.Host = "localhost:5000";
                 };
 
                 settings.SwaggerUiRoute = "/swagger/ui";

@@ -1,0 +1,15 @@
+﻿@model Fact
+
+@{
+    ViewBag.Title = "Add Fact";
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form class="form" asp-action="Add" method="post">
+    <div class="form-group">
+        <textarea class="input-lg" asp-for="Description"></textarea><br/>
+        <button class="btn btn-lg" type="submit">Submit</button>
+    </div>
+</form>

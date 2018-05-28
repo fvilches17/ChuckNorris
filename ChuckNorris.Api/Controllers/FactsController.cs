@@ -22,7 +22,6 @@ namespace ChuckNorris.Api.Controllers
         /// <summary>
         /// Gets a list of all Chuck Norris facts
         /// </summary>
-        /// <returns></returns>
         [HttpGet(Name = nameof(GetAllFacts))]
         [SwaggerResponse(StatusCodes.Status200OK, typeof(IEnumerable<Fact>))]
         public IActionResult GetAllFacts()
@@ -34,7 +33,6 @@ namespace ChuckNorris.Api.Controllers
         /// Gets a Chuck Norris fact by Id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}", Name = nameof(GetFactById))]
         [SwaggerResponse(StatusCodes.Status200OK, typeof(Fact))]
         [SwaggerResponse(StatusCodes.Status404NotFound, typeof(string), Description = "When a fact is not found by the passed Id")]
@@ -53,7 +51,6 @@ namespace ChuckNorris.Api.Controllers
         /// Adds a Chuck Norris fact
         /// </summary>
         /// <param name="description"></param>
-        /// <returns></returns>
         [HttpPost(Name = nameof(AddFact))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, typeof(void))]
         [SwaggerResponse(StatusCodes.Status422UnprocessableEntity, typeof(string), Description = "When description length is greater than allowed")]
@@ -81,6 +78,33 @@ namespace ChuckNorris.Api.Controllers
             }
 
             return CreatedAtRoute(routeName: nameof(GetFactById), routeValues: new { newFact.Id }, value: newFact);
+        }
+
+        /// <summary>
+        /// Removes a Chuck Norris fact
+        /// </summary>
+        /// <param name="id"></param>
+        [HttpDelete(Name = nameof(RemoveFact))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, typeof(string), Description = "Fact Id not found")]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, typeof(string), Description = "Not your fault")]
+        [SwaggerResponse(StatusCodes.Status204NoContent, typeof(void))]
+        public IActionResult RemoveFact(int id)
+        {
+            if (!_factRepo.Exists(id))
+            {
+                return NotFound($"Fact with id '{id}' not found");
+            }
+
+            var factToRemove = _factRepo.GetById(id);
+
+            _factRepo.Remove(factToRemove);
+
+            if (!_factRepo.Complete())
+            {
+                throw new Exception("Removing fact failed on save");
+            }
+
+            return NoContent();
         }
     }
 }
