@@ -24,9 +24,9 @@ namespace ChuckNorris.Api.Repositories
             return _context.Facts.FirstOrDefault(f => f.Id == id);
         }
 
-        public void Add(string description)
+        public void Add(Fact fact)
         {
-            var newFact = _context.Add(new Fact { Description = description });
+            var newFact = _context.Add(fact);
         }
 
         public void Remove(Fact fact)

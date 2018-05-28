@@ -11,7 +11,7 @@ namespace ChuckNorris.Api.Repositories
     {
         IEnumerable<Fact> GetAll();
         Fact GetById(int id);
-        void Add(string description);
+        void Add(Fact fact);
         void Remove(Fact fact);
         bool Exists(int id);
         bool Complete();

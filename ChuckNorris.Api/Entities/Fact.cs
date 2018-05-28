@@ -5,6 +5,8 @@ namespace ChuckNorris.Api.Entities
 {
     public class Fact
     {
+        public const int DescriptionMaxLength = 500;
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
