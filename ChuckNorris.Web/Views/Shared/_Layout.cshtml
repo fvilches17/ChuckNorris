@@ -13,15 +13,45 @@
     <link href="~/css/app.css" rel="stylesheet" />
 
     @* JS *@
+    <script defer src="~/vendor/js/jquery-3.3.1.min.js"></script>
     <script defer src="~/js/app.js"></script>
 
     @* Title *@
     <title>ChuckNorris [@ViewData["Title"]]</title>
 </head>
 <body>
-    <div>
+    <nav>
+        @{
+            const int iconHeight = 40;
+        }
+        
+        @* Home *@
+        <a asp-controller="Facts" asp-action="Index" toolti>
+            <img id="icon-home" height="@iconHeight" src="~/images/icon-home.png" alt="Home" />
+            <img id="icon-home-selected" height="@iconHeight" src="~/images/icon-home-selected.png" alt="Home" />
+        </a>
+        
+        @* Favorites *@
+        <a asp-controller="Favorites" asp-action="Index">
+            <img id="icon-favorites" height="@iconHeight" src="~/images/icon-favorites.png" alt="Favorite Facts" />
+            <img id="icon-favorites-selected" height="@iconHeight" src="~/images/icon-favorites-selected.png" alt="Favorite Facts" />
+        </a>
+        
+        @* Bio *@
+        <a asp-controller="Bio" asp-action="Index">
+            <img id="icon-chuck" height="@iconHeight" src="~/images/icon-chuck.png" alt="Bio" />
+            <img id="icon-chuck-selected" height="@iconHeight" src="~/images/icon-chuck-selected.png" alt="Bio" />
+        </a>
+        
+        @* Contact *@
+        <a asp-controller="Contact" asp-action="Index">
+            <img id="icon-contact" height="@iconHeight" src="~/images/icon-contact.png" alt="Contact" />
+            <img id="icon-contact-selected" height="@iconHeight" src="~/images/icon-contact-selected.png" alt="Contact" />
+        </a>
+    </nav>
+
+    <main>
         @RenderBody()
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elit mauris, tincidunt a augue quis, elementum luctus magna. Integer egestas ipsum vel condimentum finibus. Pellentesque dui sem, imperdiet vel orci ut, ultrices viverra velit. Aliquam eu neque augue. In quam massa, ornare ut dui a, sollicitudin maximus ipsum. Fusce at rutrum nisl, nec fringilla dolor. In pharetra gravida metus vitae dignissim.</p>
-    </div>
+    </main>
 </body>
 </html>

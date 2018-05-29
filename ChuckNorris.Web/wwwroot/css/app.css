@@ -1,10 +1,70 @@
 ﻿@font-face {
-    src: url(../fonts/Tajawal-Regular.ttf);
-    font-family: app-font;
+    font-family: 'app-font';
+    src: url('../fonts/raleway_thin-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Tajawal-Regular.ttf') format('truetype');
 }
 
 html, body {
-    background-color: #000609;
-    color: #ebebeb;
+    margin: 0;
+    background-color: #020B0F;
+    color: #C9C9C9;
     font-family: app-font;
+    line-height: 20px;
+}
+
+nav {
+    background-color: #142234;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+    nav a {
+        text-decoration: none;
+        display: inline-block;
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+    nav img:last-child {
+        display: none;
+    }
+
+main {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 100px;
+    background-color: #172942;
+    padding: 10px 35px 10px 35px;
+    text-align: right;
+    border-radius: 1%;
+}
+
+h2 {
+    text-align: right;
+}
+
+p::first-letter {
+    font-size: 150%;
+    font-weight: bolder;
+    color: #5C496E;
+}
+
+sup {
+    font-size: small;
+    color: #87709D;
+    font-weight: bolder;
+}
+
+.fixed-icon {
+    background-color: #082818;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 15px;
+    box-shadow: 0 -5px 5px 0 rgba(72, 11, 69, 0.19), 0 5px 5px 0 rgba(72, 11, 69, 0.19);
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
 }

@@ -1,6 +1,19 @@
-﻿@{
-    ViewBag.Title = "Facts";
+﻿<link href="~/css/facts.css" rel="stylesheet" />
+<script defer src="~/js/facts.js"></script>
+
+@{
+    ViewBag.Title = "All Facts";
     Layout = "_Layout";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>@ViewBag.Title<sup id="num-of-facts"></sup></h2>
+
+<article id="chuck-facts-area"></article>
+
+<div id="refresh-icon" class="fixed-icon">
+    <img src="~/images/icon-refresh.png" alt="Push-ON" height="35" />
+</div>
+
+<div id="notification-icon" class="fixed-icon">
+    <img src="~/images/icon-bell.png" alt="Push-ON" height="35" />
+</div>
