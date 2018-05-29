@@ -1,0 +1,10 @@
+﻿@font-face {
+    src: url(../fonts/Tajawal-Regular.ttf);
+    font-family: app-font;
+}
+
+html, body {
+    background-color: #000609;
+    color: #ebebeb;
+    font-family: app-font;
+}

@@ -1,0 +1,27 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    @* Meta *@
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    @* Favicon *@
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    @* Style *@
+    <link href="~/css/app.css" rel="stylesheet" />
+
+    @* JS *@
+    <script defer src="~/js/app.js"></script>
+
+    @* Title *@
+    <title>ChuckNorris [@ViewData["Title"]]</title>
+</head>
+<body>
+    <div>
+        @RenderBody()
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elit mauris, tincidunt a augue quis, elementum luctus magna. Integer egestas ipsum vel condimentum finibus. Pellentesque dui sem, imperdiet vel orci ut, ultrices viverra velit. Aliquam eu neque augue. In quam massa, ornare ut dui a, sollicitudin maximus ipsum. Fusce at rutrum nisl, nec fringilla dolor. In pharetra gravida metus vitae dignissim.</p>
+    </div>
+</body>
+</html>
