@@ -1,13 +1,27 @@
-﻿$.get("http://localhost:5000/api/facts", function (facts) {
+﻿$(document).ready(function () {
 
-    $("#num-of-facts").text(facts.length);
+    $.get("http://localhost:5000/api/facts", function (facts) {
 
-    const area = $("#chuck-facts-area");
+        $("#num-of-facts").text(facts.length);
 
-    for (let fact of facts) {
-        area.append(
-            `<section class='chuck-fact'>
-                <p>${fact.description}</p>
-            </section>`);
-    }
+        const area = $("#chuck-facts-area");
+        for (let fact of facts) {
+            area.append(
+                `<section class='chuck-fact'>
+                    <p>${fact.description}</p>
+                </section>`
+            );
+        }
+
+        $("#chuck-facts-area .chuck-fact").on("click", function () {
+            const clickedElement = $(this);
+            const className = "chuck-fact-selected";
+
+            clickedElement.hasClass(className)
+                ? clickedElement.removeClass(className)
+                : clickedElement.addClass(className); 
+        });
+    });
+
 });
+
