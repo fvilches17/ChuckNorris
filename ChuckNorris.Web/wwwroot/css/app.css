@@ -73,14 +73,19 @@ sup {
     padding: 15px;
     box-shadow: 0 0 0 0 rgb(93, 6, 89), 0 0 15px 0 rgb(93, 6, 89);
     position: fixed;
+    opacity: 0.8;
     -webkit-transition-duration: 0.5s; /* Safari */
     transition-duration: 0.5s;
 }
 
     .fixed-icon:hover {
-        background-color: rgb(54, 4, 52);
-        color: white;
+        box-shadow: 0 0 15px 0 rgb(93, 6, 89), 0 0 15px 0 rgb(93, 6, 89);
+        opacity: 1;
         cursor: pointer;
+    }
+
+    .fixed-icon:active {
+        box-shadow: 0 0 0 0 rgb(93, 6, 89), 0 0 15px 0 rgb(93, 6, 89);
     }
 
 
