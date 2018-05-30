@@ -18,6 +18,8 @@ nav {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
+    box-shadow: 0 0 0 0 rgb(16, 1, 15), 0 0 15px 0 rgb(16, 1, 15);
+    z-index: 1;
 }
 
     nav a {
