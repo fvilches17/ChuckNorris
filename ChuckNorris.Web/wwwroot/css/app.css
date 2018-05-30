@@ -88,6 +88,13 @@ sup {
         box-shadow: 0 0 0 0 rgb(93, 6, 89), 0 0 15px 0 rgb(93, 6, 89);
     }
 
+#notification-icon {
+    bottom: 20px;
+    left: 3%;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
 
 @media screen and (orientation:landscape) and (min-device-width: 319px) and (max-device-width: 640px) {
     nav {

@@ -1,27 +1,34 @@
-﻿$(document).ready(function () {
+﻿const loadChuckFacts = function (facts) {
+    $("#num-of-facts").text(facts.length);
 
-    $.get("http://localhost:5000/api/facts", function (facts) {
-
-        $("#num-of-facts").text(facts.length);
-
-        const area = $("#chuck-facts-area");
-        for (let fact of facts) {
-            area.append(
-                `<section class='chuck-fact'>
+    const area = $("#chuck-facts-area");
+    for (let fact of facts) {
+        area.append(
+            `<section class='chuck-fact'>
                     <p>${fact.description}</p>
                 </section>`
-            );
-        }
+        );
+    }
 
-        $("#chuck-facts-area .chuck-fact").on("click", function () {
-            const clickedElement = $(this);
-            const className = "chuck-fact-selected";
+    $("#chuck-facts-area .chuck-fact").on("click", function () {
+        const clickedElement = $(this);
+        const className = "chuck-fact-selected";
 
-            clickedElement.hasClass(className)
-                ? clickedElement.removeClass(className)
-                : clickedElement.addClass(className); 
-        });
+        clickedElement.hasClass(className)
+            ? clickedElement.removeClass(className)
+            : clickedElement.addClass(className);
     });
+}
 
+$(document).ready(function () {
+
+    $.get("http://localhost:5000/api/facts")
+        .done(loadChuckFacts)
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            console.error(errorThrown);
+        })
+        .always(() => {
+            $("#loader").hide();
+        });
 });
 
