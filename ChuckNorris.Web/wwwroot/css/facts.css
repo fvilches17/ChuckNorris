@@ -2,16 +2,30 @@
     background-color: #26282B;
     border: 2px dashed black;
     padding: 20px;
-    margin-bottom: 10px;
+    margin: 0 10px 10px 0;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#chuck-facts-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #notification-icon {
     bottom: 20px;
-    left: 5%;
+    left: 3%;
 }
 
 #refresh-icon {
-    bottom: 100px;
-    left: 5%;
+    bottom: 20px;
+    right: 3%;
+}
+
+@media screen and (orientation:landscape) and (min-device-width: 319px) and (max-device-width: 640px) {
+    #notification-icon {
+        right: 3%;
+        bottom: 100px;
+        left: auto;
+    }
 }

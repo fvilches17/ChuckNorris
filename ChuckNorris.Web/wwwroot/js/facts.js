@@ -1,7 +1,4 @@
-﻿$("#icon-home").hide();
-$("#icon-home-selected").show();
-
-$.get("http://localhost:5000/api/facts", function (facts) {
+﻿$.get("http://localhost:5000/api/facts", function (facts) {
 
     $("#num-of-facts").text(facts.length);
 
