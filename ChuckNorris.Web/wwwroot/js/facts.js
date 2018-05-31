@@ -17,14 +17,14 @@
             const isAlreadySelected = clickedElement.hasClass(className);
             const factId = clickedElement.data("factid");
             const factdescription = clickedElement.data("description");
-            const indexedDB = window.indexedDB ||
+            const indexedDb = window.indexedDB ||
                 window.mozIndexedDB ||
                 window.webkitIndexedDB ||
                 window.msIndexedDB ||
                 window.shimIndexedDB;
 
             // Open (or create) the database
-            let open = indexedDB.open("Chuck", 1);
+            let open = indexedDb.open("Chuck", 1);
 
             // Create the schema
             open.onupgradeneeded = function() {
@@ -59,7 +59,7 @@
 const loadChuckFacts = function() {
     $.get(`${chuckNorrisAppSettings.apiBaseUrl}/facts`)
         .done(populateChuckFacts)
-        .fail(function(jqXHR, textStatus, errorThrown) {
+        .fail(function(jqXhr, textStatus, errorThrown) {
             console.error(errorThrown);
         })
         .always(() => {
