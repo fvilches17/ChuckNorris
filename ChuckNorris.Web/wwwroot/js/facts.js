@@ -57,7 +57,7 @@
 }
 
 const loadChuckFacts = function () {
-    $.get("http://localhost:5000/api/facts")
+    $.get("http://chucknorris-api.azurewebsites.net/api/facts")
         .done(populateChuckFacts)
         .fail(function (jqXHR, textStatus, errorThrown) {
             console.error(errorThrown);

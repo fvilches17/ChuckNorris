@@ -55,7 +55,7 @@ namespace ChuckNorris.Api
                 {
                     document.BasePath = "/";
                     document.Schemes = new List<SwaggerSchema> { SwaggerSchema.Http, SwaggerSchema.Https };
-                    document.Host = "localhost:5000";
+                    document.Host = env.IsDevelopment() ? "localhost:5000" : "http://chucknorris-api.azurewebsites.net";
                 };
 
                 settings.SwaggerUiRoute = "/swagger/ui";
