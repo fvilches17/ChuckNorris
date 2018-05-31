@@ -1,0 +1,72 @@
+[
+  //CSS--------------------------------------------------------------------------------------------------
+  {
+    "outputFileName": "wwwroot/css/app.min.css",
+    "inputFiles": [
+      "wwwroot/css/app.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/facts.min.css",
+    "inputFiles": [
+      "wwwroot/css/facts.css"
+    ]
+  },
+
+  //JS----------------------------------------------------------------------------------------------------
+  {
+    "outputFileName": "wwwroot/js/app.min.js",
+    "inputFiles": [
+      "wwwroot/js/app.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/bio.min.js",
+    "inputFiles": [
+      "wwwroot/js/bio.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/contact.min.js",
+    "inputFiles": [
+      "wwwroot/js/contact.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/facts.min.js",
+    "inputFiles": [
+      "wwwroot/js/facts.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/favorites.min.js",
+    "inputFiles": [
+      "wwwroot/js/favorites.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

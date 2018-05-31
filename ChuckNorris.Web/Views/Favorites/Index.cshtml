@@ -1,9 +1,16 @@
-﻿<script defer src="~/js/favorites.js"></script>
-
-@{
+﻿@{
     ViewBag.Title = "Favorite Facts";
     Layout = "_Layout";
 }
 
-<h2>@ViewBag.Title</h2>
+@section Scripts
+    {
+    <environment include="localhost">
+        <script src="~/js/favorites.js" asp-append-version="true" defer></script>
+    </environment>
+    <environment exclude="localhost">
+        <script src="~/js/favorites.min.js" asp-append-version="true" defer></script>
+    </environment>
+}
 
+<h2>@ViewBag.Title</h2>

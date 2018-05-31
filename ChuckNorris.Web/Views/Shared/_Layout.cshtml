@@ -1,4 +1,6 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿@inject IConfiguration Configuration
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     @* Meta *@
     <meta charset="utf-8" />
@@ -10,11 +12,40 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
     @* Style *@
-    <link href="~/css/app.css" rel="stylesheet" />
+    <environment include="localhost">
+        <link href="~/css/app.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+
+    <environment exclude="localhost">
+        <link href="~/css/app.min.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+
+    @RenderSection("Styles", required: false)
 
     @* JS *@
-    <script defer src="~/vendor/js/jquery-3.3.1.min.js"></script>
-    <script defer src="~/js/app.js"></script>
+    <script asp-append-version="true" defer>
+        const chuckNorrisAppSettings = {
+            apiBaseUrl: '@Configuration["apiBaseUrl"]'
+        };
+    </script>
+    
+    <environment include="localhost">
+        <script src="~/vendor/js/jquery-3.3.1.min.js" defer></script>
+        <script src="~/js/app.js" asp-append-version="true" defer></script>
+    </environment>
+
+    <environment exclude="localhost">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/vendor/js/jquery-3.3.1.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
+                defer>
+        </script>
+        <script src="~/js/app.js" asp-append-version="true" defer></script>
+    </environment>
+    
+    @RenderSection("Scripts", required: false)
 
     @* Title *@
     <title>ChuckNorris [@ViewData["Title"]]</title>
@@ -51,7 +82,7 @@
     </main>
 
     <div id="notification-icon" class="fixed-icon">
-        <img src="~/images/icon-bell.png" alt="Push-ON" height="30" />
+        <img src="~/images/icon-bell.png" alt="Push-ON" height="30" asp-append-version="true" />
     </div>
 
 </body>

@@ -16,14 +16,11 @@ namespace ChuckNorris.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            if (!_environment.IsEnvironment("localhost"))
+            services.AddHttpsRedirection(options =>
             {
-                services.AddHttpsRedirection(options =>
-                {
-                    options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
-                    options.HttpsPort = 443;
-                });
-            }
+                options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
+                options.HttpsPort = _environment.IsEnvironment("local") ? 44311 : 443;
+            });
 
             services.AddMvc();
         }
@@ -36,11 +33,7 @@ namespace ChuckNorris.Web
                 app.UseBrowserLink();
             }
 
-            if (!env.IsEnvironment("localhost"))
-            {
-                app.UseHttpsRedirection();
-            }
-
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }

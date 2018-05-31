@@ -4,7 +4,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:5001/",
-      "sslPort": 0
+      "sslPort": 44311
     }
   },
   "profiles": {
@@ -13,6 +13,13 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "localhost"
+      }
+    },
+    "IIS Express Prod": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
     "ChuckNorris.Web": {

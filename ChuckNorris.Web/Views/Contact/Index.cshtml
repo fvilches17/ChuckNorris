@@ -1,8 +1,16 @@
-﻿<script defer src="~/js/contact.js"></script>
-
-@{
+﻿@{
     ViewBag.Title = "Contact";
     Layout = "_Layout";
+}
+
+@section Scripts
+    {
+    <environment include="localhost">
+        <script src="~/js/contact.js" asp-append-version="true" defer></script>
+    </environment>
+    <environment exclude="localhost">
+        <script src="~/js/contact.min.js" asp-append-version="true" defer></script>
+    </environment>
 }
 
 <h2>@ViewBag.Title</h2>
