@@ -7,13 +7,23 @@ namespace ChuckNorris.Web
 {
     public class Startup
     {
+        private readonly IHostingEnvironment _environment;
+
+        public Startup(IHostingEnvironment environment)
+        {
+            _environment = environment;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpsRedirection(options =>
+            if (!_environment.IsEnvironment("localhost"))
             {
-                options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
-                options.HttpsPort = 443;
-            });
+                services.AddHttpsRedirection(options =>
+                {
+                    options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
+                    options.HttpsPort = 443;
+                });
+            }
 
             services.AddMvc();
         }
@@ -26,7 +36,11 @@ namespace ChuckNorris.Web
                 app.UseBrowserLink();
             }
 
-            app.UseHttpsRedirection();
+            if (!env.IsEnvironment("localhost"))
+            {
+                app.UseHttpsRedirection();
+            }
+
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
