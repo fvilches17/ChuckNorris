@@ -57,7 +57,7 @@
 }
 
 const loadChuckFacts = function () {
-    $.get("http://chucknorris-api.azurewebsites.net/api/facts")
+    $.get(`${chuckNorrisAppSettings.apiBaseUrl}/facts`)
         .done(populateChuckFacts)
         .fail(function (jqXHR, textStatus, errorThrown) {
             console.error(errorThrown);

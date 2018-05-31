@@ -1,15 +1,22 @@
-﻿<link href="~/css/facts.css" rel="stylesheet" />
-<script defer src="~/js/facts.js"></script>
+﻿@inject IConfiguration Configuration
 
 @{
     ViewBag.Title = "All Facts";
     Layout = "_Layout";
 }
 
+<link href="~/css/facts.css" rel="stylesheet" />
+<script>
+    const chuckNorrisAppSettings = {
+        apiBaseUrl: '@Configuration["apiBaseUrl"]'
+    };
+</script>
+<script defer src="~/js/facts.js"></script>
+
 <h2>@ViewBag.Title<sup id="num-of-facts"></sup></h2>
 
 <aricle id="chuck-facts-area">
-    <img id="loader" src="~/images/loader.gif" alt="Loading..." height="100"/>
+    <img id="loader" src="~/images/loader.gif" alt="Loading..." height="100" />
 </aricle>
 
 <div id="refresh-icon" class="fixed-icon">
