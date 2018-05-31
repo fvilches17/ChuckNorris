@@ -11,7 +11,7 @@
     } else if (urlPath.toLowerCase().startsWith("/contact")) {
         $("#icon-contact").addClass(className);
     }
-}
+};
 
 $(document).ready(function () {
     highlightPageIcon();

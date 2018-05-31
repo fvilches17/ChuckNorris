@@ -1,4 +1,4 @@
-﻿const populateChuckFacts = function (facts) {
+﻿const populateChuckFacts = function(facts) {
     $("#num-of-facts").text(facts.length);
 
     const area = $("#chuck-facts-area");
@@ -11,7 +11,7 @@
     }
 
     $("#chuck-facts-area .chuck-fact").on("click",
-        function () {
+        function() {
             const clickedElement = $(this);
             const className = "chuck-fact-selected";
             const isAlreadySelected = clickedElement.hasClass(className);
@@ -27,12 +27,12 @@
             let open = indexedDB.open("Chuck", 1);
 
             // Create the schema
-            open.onupgradeneeded = function () {
+            open.onupgradeneeded = function() {
                 let db = open.result;
                 db.createObjectStore("FavoriteFacts", { keyPath: "id" });
             };
 
-            open.onsuccess = function () {
+            open.onsuccess = function() {
                 // Start a new transaction
                 const db = open.result;
                 const tx = db.transaction("FavoriteFacts", "readwrite");
@@ -41,31 +41,31 @@
                 if (isAlreadySelected) {
                     store.delete(factId).onsuccess = () => {
                         clickedElement.removeClass(className);
-                    }
+                    };
                 } else {
                     store.put({ id: factId, description: factdescription }).onsuccess = () => {
                         clickedElement.addClass(className);
-                    }
+                    };
 
                     // Close the db when the transaction is done
-                    tx.oncomplete = function () {
+                    tx.oncomplete = function() {
                         db.close();
                     };
                 }
             };
         });
-}
+};
 
-const loadChuckFacts = function () {
+const loadChuckFacts = function() {
     $.get(`${chuckNorrisAppSettings.apiBaseUrl}/facts`)
         .done(populateChuckFacts)
-        .fail(function (jqXHR, textStatus, errorThrown) {
+        .fail(function(jqXHR, textStatus, errorThrown) {
             console.error(errorThrown);
         })
         .always(() => {
             $("#loader").hide();
         });
-}
+};
 
 
 $(document).ready(function () {

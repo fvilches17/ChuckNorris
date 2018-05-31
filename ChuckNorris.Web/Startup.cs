@@ -19,6 +19,7 @@ namespace ChuckNorris.Web
                 app.UseBrowserLink();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
