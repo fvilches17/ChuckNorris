@@ -1,4 +1,4 @@
-﻿const highlightPageIcon = function() {
+﻿const highlightPageIcon = function () {
     const urlPath = window.location.pathname.toLowerCase();
     const className = "selected-icon";
 
@@ -13,25 +13,124 @@
     }
 };
 
+const notificationsIcon = $("#notification-icon");
+
+const highlightNotificationsIcon = function() {
+    notificationsIcon.css({ '-webkit-filter': 'grayscale(0)', 'filter': 'grayscale(0)' });
+};
+
+const greyOutNotificationsIcon = function() {
+    notificationsIcon.css({ '-webkit-filter': 'grayscale(100%)', 'filter': 'grayscale(100%)' });
+};
+
+const indexedDb = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
+const indexedDbName = "ChuckNorris";
+const indexedDbVersion = 1;
+
+const loadNotificationsIcon = function () {
+
+    // Open (or create) the database
+    const open = indexedDb.open(indexedDbName, indexedDbVersion);
+
+    // Create the schema
+    open.onupgradeneeded = function () {
+        const db = open.result;
+        db.createObjectStore("UserSettings", { keyPath: "name" });
+    };
+
+    open.onsuccess = function () {
+        // Start a new transaction
+        const db = open.result;
+        const tx = db.transaction("UserSettings", "readwrite");
+        const store = tx.objectStore("UserSettings");
+        const request = store.get("notifications");
+
+        request.onsuccess = () => {
+            if (Notification.permission !== "granted" || !request.result) {
+                store.put({ name: "notifications", allowed: false });
+                greyOutNotificationsIcon();
+            } else {
+                request.result.allowed
+                    ? highlightNotificationsIcon()
+                    : greyOutNotificationsIcon();
+            }
+        };
+
+        request.onerror = (error) => {
+            console.log(error);
+        };
+
+        tx.oncomplete = function () {
+            db.close();
+        };
+    };
+
+    open.onerror = function (error) {
+        console.error(error);
+    };
+};
+
+const toggleNotificationsIcon = function () {
+    // Open (or create) the database
+    const open = indexedDb.open(indexedDbName, indexedDbVersion);
+
+    // Create the schema
+    open.onupgradeneeded = function () {
+        const db = open.result;
+        db.createObjectStore("UserSettings", { keyPath: "name" });
+    };
+
+    open.onsuccess = function () {
+        // Start a new transaction
+        const db = open.result;
+        const tx = db.transaction("UserSettings", "readwrite");
+        const store = tx.objectStore("UserSettings");
+        const request = store.get("notifications");
+
+        request.onsuccess = () => {
+            const isNotificationsAllowed = !request.result.allowed;
+            store.put({ name: "notifications", allowed: isNotificationsAllowed }).onsuccess = () => {
+                isNotificationsAllowed
+                    ? highlightNotificationsIcon()
+                    : greyOutNotificationsIcon();
+            };
+        };
+
+        request.onerror = (error) => {
+            console.error(error);
+        };
+
+        tx.oncomplete = function () {
+            db.close();
+        };
+    };
+
+    open.onerror = function (error) {
+        console.error(error);
+    };
+};
+
 $(document).ready(function () {
     highlightPageIcon();
 
-    if (Notification.permission === "granted") {
-        const notificationIcon = $("#notification-icon");
-        notificationIcon.css({ '-webkit-filter': 'grayscale(0)', 'filter': 'grayscale(0)' });
+    //Check if browser supports notifications
+    if (!Notification) {
+        notificationsIcon.hide();
+        return;
     }
 
-    $("#notification-icon").on("click", function () {
-        const clickedElement = $(this);
+    //Highlight notifications button to indicate they are allowed
+    loadNotificationsIcon();
 
+    notificationsIcon.on("click", function () {
         if (Notification.permission !== "granted") {
             Notification.requestPermission().then(permission => {
-
-                Notification.permission === "granted"
-                    ? clickedElement.css({ '-webkit-filter': 'grayscale(0)', 'filter': 'grayscale(0)' })
-                    : clickedElement.css({ '-webkit-filter': 'grayscale(100%)', 'filter': 'grayscale(100%)' });
-
+                if (permission === "granted") {
+                    toggleNotificationsIcon();
+                }
             });
+        } else {
+            toggleNotificationsIcon();
         }
     });
 });
