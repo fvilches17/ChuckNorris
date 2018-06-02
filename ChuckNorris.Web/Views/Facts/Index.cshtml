@@ -3,24 +3,12 @@
     Layout = "_Layout";
 }
 
-@section Styles
-    {
-    <environment include="localhost">
-        <link href="~/css/facts.css" rel="stylesheet" />
-    </environment>
-    <environment exclude="localhost">
-        <link href="~/css/facts.min.css" rel="stylesheet" />
-    </environment>
+@section Styles{
+    <link href="~/css/facts.min.css" rel="stylesheet" asp-append-version="true" />
 }
 
-@section Scripts
-{
-    <environment include="localhost">
-        <script src="~/js/facts.js" asp-append-version="true" defer></script>
-    </environment>
-    <environment exclude="localhost">
-        <script src="~/js/facts.min.js" asp-append-version="true" defer></script>
-    </environment>
+@section Scripts{
+    <script src="~/js/facts.min.js" asp-append-version="true" defer></script>
 }
 
 <h2>@ViewBag.Title<sup id="num-of-facts"></sup></h2>

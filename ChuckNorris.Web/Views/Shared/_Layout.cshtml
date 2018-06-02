@@ -12,14 +12,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
     @* Style *@
-    <environment include="localhost">
-        <link href="~/css/app.css" rel="stylesheet" asp-append-version="true" />
-    </environment>
-
-    <environment exclude="localhost">
-        <link href="~/css/app.min.css" rel="stylesheet" asp-append-version="true" />
-    </environment>
-
+    <link href="~/css/app.min.css" rel="stylesheet" asp-append-version="true" />
     @RenderSection("Styles", required: false)
 
     @* JS *@
@@ -28,23 +21,9 @@
             apiBaseUrl: '@Configuration["apiBaseUrl"]'
         };
     </script>
-    
-    <environment include="localhost">
-        <script src="~/vendor/js/jquery-3.3.1.min.js" defer></script>
-        <script src="~/js/app.js" asp-append-version="true" defer></script>
-    </environment>
+    <script src="~/vendor/js/jquery-3.3.1.min.js" defer></script>
+    <script src="~/js/app.min.js" asp-append-version="true" defer></script>
 
-    <environment exclude="localhost">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/vendor/js/jquery-3.3.1.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
-                defer>
-        </script>
-        <script src="~/js/app.js" asp-append-version="true" defer></script>
-    </environment>
-    
     @RenderSection("Scripts", required: false)
 
     @* Title *@

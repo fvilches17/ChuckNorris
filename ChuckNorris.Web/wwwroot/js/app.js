@@ -1,14 +1,14 @@
 ﻿const highlightPageIcon = function() {
-    const urlPath = window.location.pathname;
+    const urlPath = window.location.pathname.toLowerCase();
     const className = "selected-icon";
 
-    if (urlPath.toLowerCase().startsWith("/facts")) {
+    if (urlPath.startsWith("/facts")) {
         $("#icon-home").addClass(className);
-    } else if (urlPath.toLowerCase().startsWith("/favorites")) {
+    } else if (urlPath.startsWith("/favorites")) {
         $("#icon-favorites").addClass(className);
-    } else if (urlPath.toLowerCase().startsWith("/bio")) {
+    } else if (urlPath.startsWith("/bio")) {
         $("#icon-chuck").addClass(className);
-    } else if (urlPath.toLowerCase().startsWith("/contact")) {
+    } else if (urlPath.startsWith("/contact")) {
         $("#icon-contact").addClass(className);
     }
 };

@@ -3,14 +3,8 @@
     Layout = "_Layout";
 }
 
-@section Scripts
-    {
-    <environment include="localhost">
-        <script src="~/js/bio.js" asp-append-version="true" defer></script>
-    </environment>
-    <environment exclude="localhost">
-        <script src="~/js/bio.min.js" asp-append-version="true" defer></script>
-    </environment>
+@section Scripts{
+    <script src="~/js/bio.min.js" asp-append-version="true" defer></script>
 }
 
 <h2>@ViewBag.Title</h2>
