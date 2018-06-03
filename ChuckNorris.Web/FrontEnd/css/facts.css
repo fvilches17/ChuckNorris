@@ -1,11 +1,13 @@
 ﻿.chuck-fact {
     background-color: #26282B;
     border: 2px dashed black;
-    padding: 20px;
+    padding: 15px;
     margin: 0 10px 10px 0;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     opacity: 0.8;
     transition-duration: 0.5s;
+    font-size: medium;
+    text-align: center;
 }
 
     .chuck-fact:hover {
@@ -31,20 +33,13 @@
 }
 
 #chuck-facts-area {
+    padding: 3% 5% 15% 5%;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
 }
 
-#refresh-icon {
-    bottom: 20px;
-    right: 3%;
-}
-
-@media screen and (orientation:landscape) and (min-device-width: 319px) and (max-device-width: 640px) {
-    #notification-icon {
-        right: 3%;
-        bottom: 100px;
-        left: auto;
-    }
+@media screen and (orientation:portrait) {
+    #chuck-facts-area {
+        padding: 17% 5% 60% 5%;
+    }    
 }

@@ -11,6 +11,14 @@ html, body {
     line-height: 20px;
 }
 
+::-moz-selection { /* Code for Firefox */
+    background: #87709D;
+}
+
+::selection {
+    background: #87709D;
+}
+
 nav {
     background-color: #142234;
     position: fixed;
@@ -39,8 +47,7 @@ nav {
         }
 
         nav a img {
-            max-height: 100%;
-            width: auto;
+            height: 45px;
         }
 
 main {
@@ -97,14 +104,19 @@ sup {
     }
 
 #notification-icon {
-    bottom: 20px;
+    bottom: 50px;
     left: 3%;
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
 }
 
+    #notification-icon img {
+        height: 30px;
+        width: auto;
+    }
 
-@media screen and (orientation:landscape) and (min-device-width: 319px) and (max-device-width: 640px) {
+
+@media screen and (orientation:landscape) and (min-device-width: 319px) and (max-device-width: 825px) {
     nav {
         width: 100px;
         flex-wrap: wrap;
@@ -116,12 +128,30 @@ sup {
         }
 
     main {
-        margin-top: 0;
+        margin-top: 15px;
         margin-left: 142px;
     }
 
     .selected-icon {
         border-bottom: none;
         border-left: 5px solid;
+    }
+
+    #notification-icon {
+        right: 3%;
+        bottom: 50px;
+        left: auto;
+    }
+}
+
+@media screen and (orientation:portrait) and (min-device-width: 319px) and (max-device-width: 640px) {
+    nav a img {
+        height: 30px;
+    }
+}
+
+@media screen and (orientation:landscape) and (max-device-height: 361px) {
+    nav a img {
+        height: 20px;
     }
 }

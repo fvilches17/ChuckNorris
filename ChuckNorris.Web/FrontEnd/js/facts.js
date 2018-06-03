@@ -1,14 +1,19 @@
-﻿const populateChuckFacts = function (facts) {
-    $("#num-of-facts").text(facts.length);
+﻿const populateChuckFacts = function (fact) {
 
-    const area = $("#chuck-facts-area");
-    for (let fact of facts) {
-        area.append(
-            `<section class='chuck-fact' data-factid='${fact.id}' data-description='${fact.description}'>
-                 <p>${fact.description}</p>
-            </section>`
-        );
-    }
+    $("#chuck-facts-area").append(
+        `<section class='chuck-fact' data-factid='${fact.id}' data-description='${fact.description}'>
+            <p>${fact.description}</p>
+        </section>`
+    );
+
+    //const area = $("#chuck-facts-area");
+    //for (let fact of facts) {
+    //    area.append(
+    //        `<section class='chuck-fact' data-factid='${fact.id}' data-description='${fact.description}'>
+    //             <p>${fact.description}</p>
+    //        </section>`
+    //    );
+    //}
 
     $("#chuck-facts-area .chuck-fact").on("click", function () {
         const clickedElement = $(this);
@@ -56,7 +61,7 @@
 };
 
 const loadChuckFacts = function () {
-    $.get(`${chuckNorrisAppSettings.apiBaseUrl}/facts`)
+    $.get(`${chuckNorrisAppSettings.apiBaseUrl}/facts/1`)
         .done(populateChuckFacts)
         .fail(function (jqXhr, textStatus, errorThrown) {
             console.error(errorThrown);
@@ -66,9 +71,6 @@ const loadChuckFacts = function () {
         });
 };
 
-
 $(document).ready(function () {
     loadChuckFacts();
-
-    $("#refresh-icon").on("click", loadChuckFacts);
 });

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "All Facts";
+    ViewBag.Title = "Facts";
     Layout = "_Layout";
 }
 
@@ -11,12 +11,8 @@
     <script src="~/js/facts.min.js" asp-append-version="true" defer></script>
 }
 
-<h2>@ViewBag.Title<sup id="num-of-facts"></sup></h2>
+<h2>@ViewBag.Title</h2>
 
 <aricle id="chuck-facts-area">
     <img id="loader" src="~/images/loader.gif" alt="Loading..." height="100" />
 </aricle>
-
-<div id="refresh-icon" class="fixed-icon">
-    <img src="~/images/icon-refresh.png" alt="Push-ON" height="30" />
-</div>

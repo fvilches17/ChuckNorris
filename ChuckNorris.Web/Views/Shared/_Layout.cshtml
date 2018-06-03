@@ -27,7 +27,7 @@
     @RenderSection("Scripts", required: false)
 
     @* Title *@
-    <title>ChuckNorris [@ViewData["Title"]]</title>
+    <title>Chuck Norris [@ViewData["Title"]]</title>
 </head>
 <body>
     <nav>
@@ -37,22 +37,22 @@
 
         @* Home *@
         <a id="icon-home" asp-controller="Facts" asp-action="Index">
-            <img height="@iconHeight" src="~/images/icon-home.png" alt="Home" />
+            <img src="~/images/icon-home.png" alt="Home" />
         </a>
 
         @* Favorites *@
         <a id="icon-favorites" asp-controller="Favorites" asp-action="Index">
-            <img height="@iconHeight" src="~/images/icon-favorites.png" alt="Favorite Facts" />
+            <img src="~/images/icon-favorites.png" alt="Favorite Facts" />
         </a>
 
         @* Bio *@
         <a id="icon-chuck" asp-controller="Bio" asp-action="Index">
-            <img height="@iconHeight" src="~/images/icon-chuck.png" alt="Bio" />
+            <img src="~/images/icon-chuck.png" alt="Bio" />
         </a>
 
         @* Contact *@
         <a id="icon-contact" asp-controller="Contact" asp-action="Index">
-            <img height="@iconHeight" src="~/images/icon-contact.png" alt="Contact" />
+            <img src="~/images/icon-contact.png" alt="Contact" />
         </a>
     </nav>
 
@@ -62,7 +62,7 @@
 
     @* Notifications Icon *@
     <div id="notification-icon" class="fixed-icon">
-        <img src="~/images/icon-bell.png" alt="Push-ON" height="30" asp-append-version="true" />
+        <img src="~/images/icon-bell.png" alt="Push-ON" asp-append-version="true" />
     </div>
 </body>
 </html>
