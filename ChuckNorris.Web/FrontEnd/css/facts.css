@@ -9,6 +9,11 @@
     text-align: center;
 }
 
+.chuck-fact small {
+    display: block;
+    text-align: right;
+}
+
     .chuck-fact:hover {
         cursor: pointer;
         opacity: 1;
@@ -22,9 +27,11 @@
 .chuck-fact-selected {
     background-color: #735816;
     color: white;
-    background-image: url("../images/icon-favorites-small.png");
+    background-image: url("../../wwwroot/images/icon-favorites-small.png");
     background-repeat: no-repeat;
-    background-position: top right;
+    background-position-x: 97%;
+    background-position-y: 2%;
+
 }
 
 .chuck-fact-selected p::first-letter {
