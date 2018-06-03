@@ -6,10 +6,19 @@
       "FrontEnd/css/app.css"
     ]
   },
+  //Facts
   {
     "outputFileName": "wwwroot/css/facts.min.css",
     "inputFiles": [
       "FrontEnd/css/facts.css"
+    ]
+  },
+  //Favorites
+  {
+    "outputFileName": "wwwroot/css/favorites.min.css",
+    "inputFiles": [
+      "FrontEnd/css/facts.css",
+      "FrontEnd/css/favorites.css"
     ]
   },
 
@@ -59,14 +68,15 @@
     },
     "sourceMap": false
   },
+  //Favorites
   {
     "outputFileName": "wwwroot/js/favorites.min.js",
     "inputFiles": [
       "FrontEnd/js/favorites.js"
     ],
     "minify": {
-      "enabled": true,
-      "renameLocals": true
+      "enabled": false,
+      "renameLocals": false
     },
     "sourceMap": false
   }

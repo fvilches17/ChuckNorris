@@ -90,9 +90,8 @@ const addRemoveFavoriteFact = function (target) {
         const store = tx.objectStore(tableName);
         const className = "chuck-fact-selected";
         const markAsFavorite = !clickedElement.hasClass(className);
-
         store.put({ id: selectedFactId, description: selectedFactDescription, markedAsFavorite: markAsFavorite }).onsuccess = () => {
-            markedAsFavorite ? clickedElement.addClass(className) : clickedElement.removeClass(className);
+            markAsFavorite ? clickedElement.addClass(className) : clickedElement.removeClass(className);
         };
 
         tx.oncomplete = () => {

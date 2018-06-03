@@ -3,8 +3,16 @@
     Layout = "_Layout";
 }
 
+@section Styles{
+    <link href="~/css/favorites.min.css" rel="stylesheet" asp-append-version="true" />
+}
+
 @section Scripts{
     <script src="~/js/favorites.min.js" asp-append-version="true" defer></script>
 }
 
 <h1>@ViewBag.Title</h1>
+
+<aricle id="chuck-facts-area">
+    <img id="loader" src="~/images/loader.gif" alt="Loading..." height="100" />
+</aricle>
