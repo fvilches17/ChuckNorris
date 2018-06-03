@@ -38,7 +38,6 @@ const removeFavoriteFact = function (target) {
                 factsOnScreen--;
                 if (factsOnScreen === 0) showNoResultsMessage();
             });
-            
         };
 
         tx.oncomplete = () => {
