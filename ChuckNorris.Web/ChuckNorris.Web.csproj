@@ -6,12 +6,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="FrontEnd\css\app.css" />
+    <Content Include="FrontEnd\css\facts.css" />
+    <Content Include="FrontEnd\js\app.js" />
+    <Content Include="FrontEnd\js\bio.js" />
+    <Content Include="FrontEnd\js\contact.js" />
+    <Content Include="FrontEnd\js\facts.js" />
+    <Content Include="FrontEnd\js\favorites.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\fonts\" />
+    <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\vendor\js\" />
   </ItemGroup>
 
