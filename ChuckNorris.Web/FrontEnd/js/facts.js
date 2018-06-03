@@ -1,19 +1,17 @@
-﻿const populateChuckFacts = function (fact) {
+﻿const populateChuckFact = function (fact) {
 
-    $("#chuck-facts-area").append(
-        `<section class='chuck-fact' data-factid='${fact.id}' data-description='${fact.description}'>
+    const factId = fact.id;
+    const factDescription = fact.description;
+
+    $("#chuck-facts-area").html(
+        `<section class='chuck-fact' data-factid='${factId}' data-description='${factDescription}'>
             <p>${fact.description}</p>
+            <div class="fact-nav-icons">
+                <img height="100" src="./images/icon-arrow-prev.png" alt="Previous" onclick="loadChuckFact(${factId - 1}); return false;"/>
+                <img height="100" src="./images/icon-arrow-next.png" alt="Next" onclick="loadChuckFact(${factId + 1}); return false;"/>
+            </div>
         </section>`
     );
-
-    //const area = $("#chuck-facts-area");
-    //for (let fact of facts) {
-    //    area.append(
-    //        `<section class='chuck-fact' data-factid='${fact.id}' data-description='${fact.description}'>
-    //             <p>${fact.description}</p>
-    //        </section>`
-    //    );
-    //}
 
     $("#chuck-facts-area .chuck-fact").on("click", function () {
         const clickedElement = $(this);
@@ -60,11 +58,19 @@
     });
 };
 
-const loadChuckFacts = function () {
-    $.get(`${chuckNorrisAppSettings.apiBaseUrl}/facts/1`)
-        .done(populateChuckFacts)
+const loadChuckFact = function (factId) {
+    $.get(`${chuckNorrisAppSettings.apiBaseUrl}/facts/${factId || 1}`)
+        .done(populateChuckFact)
         .fail(function (jqXhr, textStatus, errorThrown) {
-            console.error(errorThrown);
+            console.log(`Failed to load Chuck Fact. Error: ${errorThrown}`);
+            $("#chuck-facts-area").html(
+                `<section class='chuck-fact'>
+                    <p>Something went wrong... Try again</p>
+                    <div class="fact-nav-icons">
+                        <img height="50" src="./images/icon-reload.png" alt="Previous" onclick="location.reload();"/>
+                    </div>
+                </section>`
+            );
         })
         .always(() => {
             $("#loader").hide();
@@ -72,5 +78,5 @@ const loadChuckFacts = function () {
 };
 
 $(document).ready(function () {
-    loadChuckFacts();
+    loadChuckFact();
 });

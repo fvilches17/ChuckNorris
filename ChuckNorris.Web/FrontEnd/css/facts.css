@@ -2,11 +2,10 @@
     background-color: #26282B;
     border: 2px dashed black;
     padding: 15px;
-    margin: 0 10px 10px 0;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     opacity: 0.8;
     transition-duration: 0.5s;
-    font-size: medium;
+    font-size: 1.1em;
     text-align: center;
 }
 
@@ -32,6 +31,11 @@
     color: rgb(99, 6, 99);
 }
 
+.fact-nav-icons img:hover {
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
 #chuck-facts-area {
     padding: 3% 5% 15% 5%;
     display: flex;
@@ -40,6 +44,6 @@
 
 @media screen and (orientation:portrait) {
     #chuck-facts-area {
-        padding: 17% 5% 60% 5%;
+        padding: 17% 5% 40% 5%;
     }    
 }

@@ -1,6 +1,6 @@
 ﻿@font-face {
     font-family: 'app-font';
-    src: url('../fonts/raleway_thin-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Tajawal-Regular.ttf') format('truetype');
+    src: url('../../wwwroot/fonts/raleway_thin-webfont.eot?#iefix') format('embedded-opentype'), url('../../wwwroot/fonts/Tajawal-Regular.ttf') format('truetype');
 }
 
 html, body {
