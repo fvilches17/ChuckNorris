@@ -38,6 +38,11 @@ nav {
             border-bottom: 5px solid;
         }
 
+        nav a img {
+            max-height: 100%;
+            width: auto;
+        }
+
 main {
     margin-left: 8%;
     margin-right: 8%;
