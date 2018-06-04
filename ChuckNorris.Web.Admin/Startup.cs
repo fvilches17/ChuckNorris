@@ -17,10 +17,8 @@ namespace ChuckNorris.Web.Admin
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddScoped<IFactsClient, FactsClient>((foo) =>
-            {
-                return new FactsClient { BaseUrl = Configuration["apiBaseUrl"] };
-            });
+            services.AddScoped<IFactsClient, FactsClient>(f => new FactsClient { BaseUrl = Configuration["apiBaseUrl"] });
+            services.AddScoped<ISubmissionsClient, SubmissionsClient>(s => new SubmissionsClient { BaseUrl = Configuration["apiBaseUrl"] });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

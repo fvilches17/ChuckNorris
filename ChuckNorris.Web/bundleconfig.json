@@ -28,6 +28,13 @@
       "FrontEnd/css/bio.css"
     ]
   },
+  //Submissions
+  {
+    "outputFileName": "wwwroot/css/submissions.min.css",
+    "inputFiles": [
+      "FrontEnd/css/submissions.css"
+    ]
+  },
 
   //JS----------------------------------------------------------------------------------------------------
   {
@@ -53,9 +60,9 @@
     "sourceMap": false
   },
   {
-    "outputFileName": "wwwroot/js/contact.min.js",
+    "outputFileName": "wwwroot/js/submissions.min.js",
     "inputFiles": [
-      "FrontEnd/js/contact.js"
+      "FrontEnd/js/submissions.js"
     ],
     "minify": {
       "enabled": true,

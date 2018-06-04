@@ -25,6 +25,7 @@ namespace ChuckNorris.Api
         {
             services.AddDbContext<AppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IFactRepository, FactRepository>();
+            services.AddScoped<ISubmissionRepository, SubmissionRepository>();
             services.AddMvc();
             services.AddCors();
         }

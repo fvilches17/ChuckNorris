@@ -9,6 +9,7 @@ namespace ChuckNorris.Api
         public AppContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Fact> Facts { get; set; }
+        public DbSet<Submission> Submissions { get; set; }
 
         public void EnsureSeedForContext()
         {

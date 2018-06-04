@@ -2,7 +2,7 @@
 
 namespace ChuckNorris.Web.Controllers
 {
-    public class ContactController:Controller
+    public class SubmissionsController:Controller
     {
         public IActionResult Index()
         {

@@ -1,9 +1,5 @@
-﻿using System;
+﻿using ChuckNorris.Api.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ChuckNorris.Api.Entities;
 
 namespace ChuckNorris.Api.Repositories
 {
