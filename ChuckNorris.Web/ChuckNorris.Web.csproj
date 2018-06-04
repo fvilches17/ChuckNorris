@@ -10,7 +10,7 @@
     <Content Include="FrontEnd\css\facts.css" />
     <Content Include="FrontEnd\js\app.js" />
     <Content Include="FrontEnd\js\bio.js" />
-    <Content Include="FrontEnd\js\contact.js" />
+    <Content Include="FrontEnd\js\submissions.js" />
     <Content Include="FrontEnd\js\facts.js" />
     <Content Include="FrontEnd\js\favorites.js" />
   </ItemGroup>

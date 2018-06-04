@@ -59,6 +59,7 @@
     },
     "sourceMap": false
   },
+  //Submissions
   {
     "outputFileName": "wwwroot/js/submissions.min.js",
     "inputFiles": [

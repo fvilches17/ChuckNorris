@@ -49,8 +49,8 @@ const handleTouchMove = function(event) {
 
     if (leftBorderReeached || rightBorderReeached) {
         currentFactOnScreen.css({ opacity: 0.5 });
-        readyToLoadNextFact = rightBorderReeached;
-        readyToLoadPrevFact = leftBorderReeached;
+        readyToLoadNextFact = leftBorderReeached;
+        readyToLoadPrevFact = rightBorderReeached;
         return;
     }
 

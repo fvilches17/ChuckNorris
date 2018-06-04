@@ -3,8 +3,21 @@
     Layout = "_Layout";
 }
 
+@section Styles{
+    <link href="~/css/submissions.min.css" rel="stylesheet" asp-append-version="true" />
+}
+
 @section Scripts{
     <script src="~/js/submissions.min.js" asp-append-version="true" defer></script>
 }
 
 <h1>@ViewBag.Title</h1>
+<form>
+    <img src="~/images/chuck-norris-soldier.png" />
+    <textarea id="fact-description" maxlength="150"></textarea>
+    <button onclick="event.preventDefault(); submitFactForApproval()">Submit</button>
+</form>
+
+<div id="confirmation-area">
+
+</div>

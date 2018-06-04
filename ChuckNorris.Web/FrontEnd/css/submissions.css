@@ -1,0 +1,45 @@
+﻿form {
+    position: relative;
+}
+
+h1 {
+    text-align: left;
+}
+
+form img {
+    max-height: 50%;
+    height: 30%;
+    width: auto;
+    position: absolute;
+    right: 0%;
+    bottom: 40px;
+}
+
+textarea {
+    width: 90%;
+    height: 40%;
+    display: block;
+    font-size: xx-large;
+    background-color: rgb(3, 43, 7);
+    color: #C9C9C9;
+    border-radius: 15px;
+    padding: 25px;
+    margin-right: auto;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    width: 25%;
+    border: none;
+    background-color: rgb(35, 2, 34);
+    color: #C9C9C9;
+    font-weight: bolder;
+    margin: 10px 0 10px 0;
+    margin-right: auto;
+    padding: 15px 50px 15px 50px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 15px;
+    box-shadow: 0 0 0 0 rgb(104, 5, 99), 0 0 15px 0 rgb(104, 5, 99);
+}
