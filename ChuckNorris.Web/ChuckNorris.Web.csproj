@@ -27,4 +27,6 @@
     <Folder Include="wwwroot\vendor\js\" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties bundleconfig_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>
