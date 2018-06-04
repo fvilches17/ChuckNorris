@@ -1,0 +1,15 @@
+﻿#cartoon-chuck {
+    margin-left: 15px;
+    padding: 0 10px 15px 0;
+    float: left;
+    height: 50%;
+}
+
+@media screen and (orientation:landscape) and (max-device-width: 750px), screen and (orientation:portrait) and (min-device-width: 319px) and (max-device-width: 640px) {
+    #cartoon-chuck {
+        width: 100%;
+        height: auto;
+        padding: 10px 0 10px 0;
+    }    
+}
+

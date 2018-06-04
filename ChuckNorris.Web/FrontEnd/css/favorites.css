@@ -3,7 +3,24 @@
 }
 
 #chuck-facts-area {
+    /*height: 45%;*/
     flex-wrap: wrap;
     padding: 15px 15px 35px 15px;
     justify-content: center;
+}
+
+
+@media screen and (orientation:landscape) and (max-device-width: 750px), screen and (orientation:portrait) and (min-device-width: 319px) and (max-device-width: 640px) {
+
+    #chuck-facts-area {
+        position:inherit;
+        height: inherit;
+    }
+
+    .chuck-fact {
+        position: inherit;
+        width: inherit;
+        top: inherit;
+        z-index: inherit;
+    }
 }

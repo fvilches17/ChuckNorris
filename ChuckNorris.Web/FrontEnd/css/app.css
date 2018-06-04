@@ -154,18 +154,6 @@ sup {
     .fact-nav-icons {
         display: none;
     }
-
-    #chuck-facts-area {
-        position: relative;
-        height: 30%;
-    }
-
-    .chuck-fact {
-        position: absolute;
-        width: 200px;
-        top: 10%;
-        z-index: 1;
-    }
 }
 
 @media screen and (orientation:landscape) and (max-device-height: 361px) {

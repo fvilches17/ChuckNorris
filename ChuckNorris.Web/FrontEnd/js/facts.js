@@ -69,6 +69,7 @@ const handleTouchEnd = function () {
 
     if (readyToLoadNextFact) {
         loadChuckFact(selectedFactId + 1);
+        return;
     }
 
     currentFactOnScreen.offset({ left: originalScreenOffsetForFact });

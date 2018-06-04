@@ -21,6 +21,13 @@
       "FrontEnd/css/favorites.css"
     ]
   },
+  //Bio
+  {
+    "outputFileName": "wwwroot/css/bio.min.css",
+    "inputFiles": [
+      "FrontEnd/css/bio.css"
+    ]
+  },
 
   //JS----------------------------------------------------------------------------------------------------
   {
