@@ -56,6 +56,8 @@ const storeSubmissionInIndexedDb = function (factDescription) {
         try {
             store.add({ description: factDescription, synched: false }).onsuccess = () => {
                 console.log(`Added new fact to fact submissions db: ${factDescription}`);
+                clearTextArea();
+                $("#confirmation-area").html(offlineSubmissionMessage);
             };
         } catch (error) {
             $("#loader").hide();

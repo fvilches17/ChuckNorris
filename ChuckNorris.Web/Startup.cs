@@ -39,7 +39,7 @@ namespace ChuckNorris.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Facts}/{action=Index}/{id?}");
+                    template: "{controller=Facts}/{action=Index}");
             });
         }
     }
