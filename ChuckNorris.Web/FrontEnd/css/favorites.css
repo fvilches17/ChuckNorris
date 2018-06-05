@@ -3,9 +3,8 @@
 }
 
 #chuck-facts-area {
-    /*height: 45%;*/
     flex-wrap: wrap;
-    padding: 15px 15px 35px 15px;
+    padding: 0px 15px 35px 15px;
     justify-content: center;
 }
 

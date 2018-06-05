@@ -267,8 +267,8 @@ const loadMostRecentFact = function () {
         const countRequest = store.count();
         countRequest.onsuccess = () => {
             loadChuckFact(countRequest.result);
-        }
-    }
+        };
+    };
 };
 
 const loadErrorMessage = function (errorThrown) {
@@ -316,4 +316,15 @@ $(document).ready(function () {
     } else {
         getMostRecentlyViewedFactId();
     }
+
+    window.addEventListener("orientationchange", function () {
+        if (currentFactOnScreen) {
+            //center fact
+            const screenWidth = window.innerWidth;
+            const factWidth = currentFactOnScreen.width();
+            const offset = (screenWidth / 2) - (factWidth / 2);
+            currentFactOnScreen.offset({ left: offset });
+            //currentFactOnScreen.css({ top: "10%", left: "50%", "-webkit-transform": "translateX(-50%)", transform: "translateX(-50%)"});
+        }
+    });
 });

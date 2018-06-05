@@ -5,7 +5,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     opacity: 0.8;
     transition-duration: 0.5s;
-    font-size: 1.1em;
+    font-size: 1em;
     text-align: center;
 }
 
@@ -55,17 +55,21 @@
     }
 }
 
-@media screen and (orientation:landscape) and (max-device-width: 750px), screen and (orientation:portrait) and (min-device-width: 319px) and (max-device-width: 640px) {
+@media screen and (orientation:landscape) and (max-device-width: 824px), screen and (orientation:portrait) and (min-device-width: 319px) and (max-device-width: 640px) {
     
     #chuck-facts-area {
         position: relative;
-        height: 30%;
+        height: 70vmin;
     }
 
     .chuck-fact {
         position: absolute;
-        width: 200px;
-        top: 10%;
+        width: 65%;
         z-index: 1;
+        top: 10px;
+    }
+
+    .fact-nav-icons {
+        display: none;
     }
 }
