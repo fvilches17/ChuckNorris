@@ -10,8 +10,7 @@ const populateChuckFact = function (fact) {
     const favorite = fact.markedAsFavorite ? "chuck-fact-selected" : "";
     const factId = fact.id;
     const description = fact.description;
-
-    $("#chuck-facts-area").html(
+    const chuckFact =
         `<section class='chuck-fact ${favorite}' 
             onclick='addRemoveFavoriteFact(this)' 
             ontouchstart="handleTouchStart(event)"
@@ -24,8 +23,17 @@ const populateChuckFact = function (fact) {
                 <img height="100" src="./images/icon-arrow-next.png" alt="Next" onclick="event.stopPropagation(); loadChuckFact(${factId + 1}); return false;"/>
             </div>
             <small>${factId}</small>
-        </section>`
-    );
+        </section>`;
+
+    const chuckFactElement = $(".chuck-fact");
+
+    if (chuckFactElement.length === 1) {
+        chuckFactElement.replaceWith(chuckFact);
+    } else {
+        $("#chuck-facts-area").append(
+            chuckFact
+        );
+    }
 
     selectedFactId = factId;
     selectedFactDescription = description;
@@ -37,12 +45,14 @@ const populateChuckFact = function (fact) {
 let lastMove = null;
 
 
-const handleTouchStart = function(event) {
+const handleTouchStart = function (event) {
+    readyToLoadPrevFact = false;
+    readyToLoadNextFact = false;
     currentFactOnScreen.css({ "transition-duration": "0s" });
     lastMove = event;
 };
 
-const handleTouchMove = function(event) {
+const handleTouchMove = function (event) {
     const currentLeftOffset = currentFactOnScreen.offset().left;
     const leftBorderReeached = currentLeftOffset <= 10;
     const rightBorderReeached = currentLeftOffset >= $(window).width() - currentFactOnScreen.width() - 45;
@@ -62,10 +72,11 @@ const handleTouchMove = function(event) {
 
 
 const handleTouchEnd = function () {
+
     if (readyToLoadPrevFact) {
         loadChuckFact(selectedFactId - 1);
         return;
-    } 
+    }
 
     if (readyToLoadNextFact) {
         loadChuckFact(selectedFactId + 1);
@@ -182,12 +193,15 @@ const getFactFromIndexedDb = function (factId) {
                     loadChuckFact(1);
                 }
             } else {
+                $("#loader").hide();
                 populateChuckFact(fact);
             }
         };
 
         request.onerror = (error) => {
             console.log(error);
+            $("#loader").hide();
+            loadErrorMessage();
         };
 
         tx.oncomplete = function () {
@@ -197,6 +211,8 @@ const getFactFromIndexedDb = function (factId) {
 
     open.onerror = function (error) {
         console.error(error);
+        $("#loader").hide();
+        loadErrorMessage();
     };
 };
 
@@ -217,6 +233,7 @@ const getMostRecentlyViewedFactId = function () {
         request.onsuccess = () => {
             if (request.result) {
                 factId = request.result.factId;
+                $("#loader").hide();
             }
 
             loadChuckFact(factId || 1 /*default*/);
@@ -224,6 +241,7 @@ const getMostRecentlyViewedFactId = function () {
 
         request.onerror = (error) => {
             console.log(error);
+            $("#loader").hide();
         };
 
         tx.oncomplete = function () {
@@ -233,11 +251,27 @@ const getMostRecentlyViewedFactId = function () {
 
     open.onerror = function (error) {
         console.error(error);
+        $("#loader").hide();
     };
 
 };
 
-const loadErrorMessage = function(errorThrown) {
+const loadMostRecentFact = function () {
+    const open = indexedDb.open(indexedDbName, indexedDbVersion);
+
+    open.onsuccess = () => {
+        const db = open.result;
+        const tableName = dbStores.facts.name;
+        const tx = db.transaction(tableName, "readwrite");
+        const store = tx.objectStore(tableName);
+        const countRequest = store.count();
+        countRequest.onsuccess = () => {
+            loadChuckFact(countRequest.result);
+        }
+    }
+};
+
+const loadErrorMessage = function (errorThrown) {
     console.log(`Failed to load Chuck Fact. Error: ${errorThrown}`);
     $("#chuck-facts-area").html(
         `<section class='chuck-fact'>
@@ -267,14 +301,16 @@ const loadFactFromApi = function (factId) {
 };
 
 const loadChuckFact = function (factId) {
+    if (currentFactOnScreen) currentFactOnScreen.hide();
     $("#loader").show();
-    getFactFromIndexedDb(factId);
+
+    if (factId === 0) loadMostRecentFact(); //means we've reched 1, and tried for previous fact
+    else getFactFromIndexedDb(factId);
 };
 
 $(document).ready(function () {
-    //load fact requested from query string
-    let factId = parseInt(getQueryParameterByName("id"));
-
+    //try load fact requested from query string
+    const factId = parseInt(getQueryParameterByName("id"));
     if (factId) {
         loadChuckFact(factId);
     } else {

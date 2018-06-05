@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace ChuckNorris.Api.Controllers
 {

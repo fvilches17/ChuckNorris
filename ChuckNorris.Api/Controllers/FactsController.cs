@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace ChuckNorris.Api.Controllers
 {
@@ -43,6 +44,8 @@ namespace ChuckNorris.Api.Controllers
             {
                 return NotFound($"Fact with id '{id}' not found");
             }
+
+            Thread.Sleep(1000);
 
             return Ok(entityObject);
         }
