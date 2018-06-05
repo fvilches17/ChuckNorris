@@ -115,6 +115,14 @@ sup {
         box-shadow: 0 0 0 0 rgb(93, 6, 89), 0 0 15px 0 rgb(93, 6, 89);
     }
 
+.chuck-link {
+    color: rgb(3, 108, 3);
+    font-size: larger;
+    text-decoration: none;
+    border-bottom: 2px solid #5c496e;
+    font-weight: bold;
+}
+
 #offline-icon {
     position: fixed;
     top: 85px;

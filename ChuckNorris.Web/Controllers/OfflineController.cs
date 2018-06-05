@@ -2,14 +2,9 @@
 
 namespace ChuckNorris.Web.Controllers
 {
-    public class BioController:Controller
+    public class OfflineController : Controller
     {
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Movies()
         {
             return View();
         }

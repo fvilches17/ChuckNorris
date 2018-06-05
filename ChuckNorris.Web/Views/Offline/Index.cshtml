@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Offline";
+    Layout = "_Layout";
+}
+
+@section Styles {
+
+    <link href="~/css/offline.min.css" rel="stylesheet" asp-append-version="false" />
+}
+
+<h1>@ViewBag.Title</h1>
+<div class="offline-content">
+    <p>Seems like you need to find yourself an internet connection</p>
+    <button onclick="window.history.back();">Back</button>
+    <img id="offline-dino" src="~/images/offline-dinosaur.gif" alt="offline" />
+</div>      

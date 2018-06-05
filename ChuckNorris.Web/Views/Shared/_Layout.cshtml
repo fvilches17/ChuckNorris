@@ -12,17 +12,17 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
     @* Style *@
-    <link href="~/css/app.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/app.min.css" rel="stylesheet" asp-append-version="false" />
     @RenderSection("Styles", required: false)
 
     @* JS *@
-    <script asp-append-version="true" defer>
+    <script asp-append-version="false" defer>
         const chuckNorrisAppSettings = {
             apiBaseUrl: '@Configuration["apiBaseUrl"]'
         };
     </script>
     <script src="~/vendor/js/jquery-3.3.1.min.js" defer></script>
-    <script src="~/js/app.min.js" asp-append-version="true" defer></script>
+    <script src="~/js/app.min.js" asp-append-version="false" defer></script>
 
     @RenderSection("Scripts", required: false)
 
@@ -58,12 +58,12 @@
 
     @* Notifications Icon *@
     <div id="notification-icon" class="fixed-icon">
-        <img src="~/images/icon-bell.png" alt="Push-ON" asp-append-version="true" />
+        <img src="~/images/icon-bell.png" alt="Push-ON" asp-append-version="false" />
     </div>
 
     @* Offline Icon *@
     <div id="offline-icon" class="">
-        <img src="~/images/icon-offline.png" alt="Offline" asp-append-version="true" />
+        <img src="~/images/icon-offline.png" alt="Offline" asp-append-version="false" />
     </div>
 </body>
 </html>

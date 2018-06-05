@@ -35,8 +35,16 @@
       "FrontEnd/css/submissions.css"
     ]
   },
+  //Offline
+  {
+    "outputFileName": "wwwroot/css/offline.min.css",
+    "inputFiles": [
+      "FrontEnd/css/offline.css"
+    ]
+  },
 
   //JS----------------------------------------------------------------------------------------------------
+  //App
   {
     "outputFileName": "wwwroot/js/app.min.js",
     "inputFiles": [
@@ -48,6 +56,19 @@
     },
     "sourceMap": false
   },
+  //Service Worker
+  {
+    "outputFileName": "wwwroot/serviceWorker.min.js",
+    "inputFiles": [
+      "FrontEnd/js/serviceWorker.js"
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": false
+    },
+    "sourceMap": false
+  },
+  //Bio
   {
     "outputFileName": "wwwroot/js/bio.min.js",
     "inputFiles": [

@@ -30,7 +30,7 @@ namespace ChuckNorris.Web
             if (env.IsEnvironment("localhost"))
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
+                //app.UseBrowserLink();
             }
 
             app.UseHttpsRedirection();

@@ -175,17 +175,28 @@ const setOfflineTheme = function() {
     $("#main-nav").addClass("offline");
     $("main").addClass("offline");
     $("#offline-icon").show();
-}
+};
 
-const setOnlineTheme = function () {
+const setOnlineTheme = function() {
     $("html").removeClass("offline");
     $("body").removeClass("offline");
     $("#main-nav").removeClass("offline");
     $("main").removeClass("offline");
     $("#offline-icon").hide();
-}
+};
+
+const registerServiceWorker = function() {
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+            .register("/serviceWorker.min.js")
+            .then(console.log("SW Registered"))
+            .catch(err => console.error(`There was a problem registering the service worker: ${err}`));
+    }
+};
 
 $(document).ready(function () {
+
+    registerServiceWorker();
 
     if (!navigator.onLine) {
         setOfflineTheme();

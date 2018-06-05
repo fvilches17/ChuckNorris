@@ -1,0 +1,28 @@
+﻿button {
+    display: block;
+    margin-left: auto;
+    text-align: center;
+    border: none;
+    background-color: rgb(35, 2, 34);
+    color: #C9C9C9;
+    font-weight: bolder;
+    padding: 15px 50px 15px 50px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 15px;
+    box-shadow: 0 0 0 0 rgb(104, 5, 99), 0 0 20px 0 rgb(104, 5, 99);
+}
+
+button:hover {
+    box-shadow: 0 0 15px 0 rgb(104, 5, 99), 0 0 20px 0 rgb(104, 5, 99);
+}
+
+#offline-dino {
+    display: block;
+    height: 30%;
+    max-height: 25vh;
+}
+
+.offline-content {
+    margin-bottom: 80px;
+}
