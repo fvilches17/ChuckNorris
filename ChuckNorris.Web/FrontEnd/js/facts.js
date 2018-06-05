@@ -324,7 +324,7 @@ $(document).ready(function () {
         if (currentFactOnScreen) {
             //center fact
             const screenWidth = window.innerWidth;
-            const isLandscape = screenWidth < window.innerHeight;
+            const isLandscape = screenWidth > window.innerHeight;
             const factWidth = currentFactOnScreen.width();
             const offset = (screenWidth / 2) - (factWidth / 2);
             currentFactOnScreen.offset({ left: isLandscape ? offset + 10: offset });
