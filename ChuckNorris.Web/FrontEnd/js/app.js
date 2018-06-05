@@ -169,7 +169,31 @@ const toggleNotificationsIcon = function () {
     };
 };
 
+const setOfflineTheme = function() {
+    $("html").addClass("offline");
+    $("body").addClass("offline");
+    $("#main-nav").addClass("offline");
+    $("main").addClass("offline");
+    $("#offline-icon").show();
+}
+
+const setOnlineTheme = function () {
+    $("html").removeClass("offline");
+    $("body").removeClass("offline");
+    $("#main-nav").removeClass("offline");
+    $("main").removeClass("offline");
+    $("#offline-icon").hide();
+}
+
 $(document).ready(function () {
+
+    if (!navigator.onLine) {
+        setOfflineTheme();
+    }
+
+    window.addEventListener('online', setOnlineTheme);
+    window.addEventListener('offline', setOfflineTheme);
+        
     highlightPageIcon();
     loadIndexedDb();
 

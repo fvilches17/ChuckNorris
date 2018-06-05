@@ -30,7 +30,7 @@
     <title>Chuck Norris [@ViewData["Title"]]</title>
 </head>
 <body>
-    <nav>
+    <nav id="main-nav">
         @* Home *@
         <a id="icon-home" asp-controller="Facts" asp-action="Index">
             <img src="~/images/icon-home.png" alt="Home" />
@@ -59,6 +59,11 @@
     @* Notifications Icon *@
     <div id="notification-icon" class="fixed-icon">
         <img src="~/images/icon-bell.png" alt="Push-ON" asp-append-version="true" />
+    </div>
+
+    @* Offline Icon *@
+    <div id="offline-icon" class="">
+        <img src="~/images/icon-offline.png" alt="Offline" asp-append-version="true" />
     </div>
 </body>
 </html>

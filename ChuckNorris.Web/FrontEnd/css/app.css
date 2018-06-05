@@ -11,6 +11,10 @@ html, body {
     line-height: 20px;
 }
 
+    html.offline, body.offline {
+        background-color: #1B1D1E;
+    }
+
 ::-moz-selection { /* Code for Firefox */
     background: #87709D;
 }
@@ -29,6 +33,10 @@ nav {
     box-shadow: 0 0 0 0 rgb(16, 1, 15), 0 0 15px 0 rgb(16, 1, 15);
     z-index: 1;
 }
+
+    nav.offline {
+        background-color: #303235;
+    }
 
     nav a {
         text-decoration: none;
@@ -58,6 +66,10 @@ main {
     padding: 10px 30px 10px 30px;
     text-align: right;
 }
+
+    main.offline {
+        background-color: #0B0C0E;
+    }
 
 h2 {
     text-align: right;
@@ -103,6 +115,18 @@ sup {
         box-shadow: 0 0 0 0 rgb(93, 6, 89), 0 0 15px 0 rgb(93, 6, 89);
     }
 
+#offline-icon {
+    position: fixed;
+    top: 85px;
+    right: 15px;
+    z-index: 1;
+    display: none;
+}
+
+    #offline-icon img {
+        height: 50px;
+    }
+
 #notification-icon {
     bottom: 50px;
     left: 3%;
@@ -142,6 +166,11 @@ sup {
         bottom: 50px;
         left: auto;
     }
+
+    #offline-icon {
+        top: 1px;
+        right: 35px;
+    }
 }
 
 @media screen and (orientation:portrait) and (min-device-width: 319px) and (max-device-width: 640px) {
@@ -153,5 +182,12 @@ sup {
 @media screen and (orientation:landscape) and (max-device-height: 361px) {
     nav a img {
         height: 20px;
+    }
+}
+
+@media screen and (orientation:landscape) and (min-device-width: 1000px) {
+    #offline-icon {
+        top: 85px;
+        right: 55px;
     }
 }
