@@ -38,14 +38,13 @@ const populateChuckFact = function (fact) {
     selectedFactId = factId;
     selectedFactDescription = description;
     currentFactOnScreen = $(".chuck-fact");
-    originalScreenOffsetForFact = currentFactOnScreen.offset().left;
     markMostRecentlyViewedFact(factId);
 };
 
 let lastMove = null;
 
-
 const handleTouchStart = function (event) {
+    originalScreenOffsetForFact = currentFactOnScreen.offset().left;
     readyToLoadPrevFact = false;
     readyToLoadNextFact = false;
     currentFactOnScreen.css({ "transition-duration": "0s" });
@@ -54,7 +53,10 @@ const handleTouchStart = function (event) {
 
 const handleTouchMove = function (event) {
     const currentLeftOffset = currentFactOnScreen.offset().left;
-    const leftBorderReeached = currentLeftOffset <= 10;
+
+    const isLandscape = window.innerWidth > window.innerHeight;
+    const leftBorderThreshold = isLandscape ? 100 : 10;
+    const leftBorderReeached = currentLeftOffset <= leftBorderThreshold;
     const rightBorderReeached = currentLeftOffset >= $(window).width() - currentFactOnScreen.width() - 45;
 
     if (leftBorderReeached || rightBorderReeached) {
@@ -308,6 +310,7 @@ const loadChuckFact = function (factId) {
     else getFactFromIndexedDb(factId);
 };
 
+
 $(document).ready(function () {
     //try load fact requested from query string
     const factId = parseInt(getQueryParameterByName("id"));
@@ -321,10 +324,10 @@ $(document).ready(function () {
         if (currentFactOnScreen) {
             //center fact
             const screenWidth = window.innerWidth;
+            const isLandscape = screenWidth < window.innerHeight;
             const factWidth = currentFactOnScreen.width();
             const offset = (screenWidth / 2) - (factWidth / 2);
-            currentFactOnScreen.offset({ left: offset });
-            //currentFactOnScreen.css({ top: "10%", left: "50%", "-webkit-transform": "translateX(-50%)", transform: "translateX(-50%)"});
+            currentFactOnScreen.offset({ left: isLandscape ? offset + 10: offset });
         }
     });
 });
