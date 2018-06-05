@@ -35,7 +35,12 @@ namespace ChuckNorris.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Facts}/{action=Index}/{id?}");
+            });
         }
     }
 }

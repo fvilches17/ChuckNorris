@@ -1,6 +1,7 @@
-﻿const version = "v16";
+﻿const version = "v32";
 const resourcesToCache = [
     //VIEWS
+    //"/",
     "/Facts",
     "/Favorites",
     "/Bio",
@@ -55,7 +56,7 @@ const addCachedResources = function (cache) {
 };
 
 const processInstallEvent = function (event) {
-    console.log(`SW v${version} installed @ ${new Date().toLocaleTimeString()}`);
+    console.log(`SW ${version} installed @ ${new Date().toLocaleTimeString()}`);
     self.skipWaiting();
 
     event.waitUntil(caches
@@ -93,8 +94,8 @@ const processFetchEvent = function (event) {
                 }
 
                 return fetch(event.request);
-            })
-    );
+            }).catch(err => console.log(err))
+    ).catch(err => console.log(err));
 };
 
 // ReSharper disable once Html.EventNotResolved

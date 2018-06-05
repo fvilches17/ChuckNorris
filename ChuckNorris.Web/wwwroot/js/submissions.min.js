@@ -15,16 +15,16 @@ const submitFactForApproval = function (event) {
     $("#loader").show();
 
     //Process submission
-    if (navigator.onLine) {
+    if (!navigator.onLine) {
+        //Store for later synching
+        storeSubmissionInIndexedDb(factDescription);
+    } else {
         const url = `${chuckNorrisAppSettings.apiBaseUrl}/submissions/`;
         const data = { description: factDescription };
         postData(url, data)
             .then(handleSubmissionSuccess)
             .catch(error => console.error(error))
             .finally(() => { $("#loader").hide(); });
-    } else {
-        //Store for later synching
-        storeSubmissionInIndexedDb(factDescription);
     }
 };
 
