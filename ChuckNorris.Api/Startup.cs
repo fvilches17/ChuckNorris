@@ -37,7 +37,7 @@ namespace ChuckNorris.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder => builder.WithOrigins("*"));
+            app.UseCors(builder => builder.WithOrigins("*").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             appContext.Database.Migrate();
             appContext.EnsureSeedForContext();

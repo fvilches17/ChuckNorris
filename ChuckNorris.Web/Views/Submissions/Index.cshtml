@@ -12,12 +12,13 @@
 }
 
 <h1>@ViewBag.Title</h1>
-<form>
-    <img src="~/images/chuck-norris-soldier.png" />
+<form onsubmit="submitFactForApproval(event)">
+    <div id="chuck-cartoon"><img src="~/images/chuck-norris-soldier.png" alt="Chuck Norris" /></div>
     <textarea id="fact-description" maxlength="150"></textarea>
-    <button onclick="event.preventDefault(); submitFactForApproval()">Submit</button>
+    <div id="submission-controls">
+        <button>Submit</button>
+        <img id="loader" src="~/images/loader.gif" alt="loading..."/>
+    </div>
 </form>
 
-<div id="confirmation-area">
-
-</div>
+<p id="confirmation-area"></p>

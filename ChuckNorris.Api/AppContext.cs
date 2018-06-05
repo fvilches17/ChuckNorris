@@ -14,9 +14,11 @@ namespace ChuckNorris.Api
         public void EnsureSeedForContext()
         {
             Facts.RemoveRange(Facts);
+            Submissions.RemoveRange(Submissions);
             SaveChanges();
 
             Database.ExecuteSqlCommand("DBCC CHECKIDENT('Facts', RESEED, 0)");
+            Database.ExecuteSqlCommand("DBCC CHECKIDENT('Submissions', RESEED, 0)");
 
             var facts = new List<Fact>
             {

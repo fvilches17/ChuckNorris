@@ -6,13 +6,13 @@ h1 {
     text-align: left;
 }
 
-form img {
-    max-height: 50%;
-    height: 30%;
+#chuck-cartoon img {
+    max-height: 25%;
+    height: 25%;
     width: auto;
     position: absolute;
-    right: 0%;
-    bottom: 40px;
+    right: 0;
+    bottom: 55px;
 }
 
 textarea {
@@ -27,19 +27,37 @@ textarea {
     margin-right: auto;
 }
 
-button {
-    display: flex;
-    justify-content: center;
-    width: 25%;
+form button {
+    text-align: center;
     border: none;
     background-color: rgb(35, 2, 34);
     color: #C9C9C9;
     font-weight: bolder;
-    margin: 10px 0 10px 0;
-    margin-right: auto;
+    margin: 10px 15px 5px 0;
     padding: 15px 50px 15px 50px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 15px;
-    box-shadow: 0 0 0 0 rgb(104, 5, 99), 0 0 15px 0 rgb(104, 5, 99);
+    box-shadow: 0 0 0 0 rgb(104, 5, 99), 0 0 20px 0 rgb(104, 5, 99);
+}
+
+    form button:hover {
+        box-shadow: 0 0 15px 0 rgb(104, 5, 99), 0 0 20px 0 rgb(104, 5, 99);
+    }
+
+
+#submission-controls {
+    text-align: left;
+    align-items: center;
+    display: flex;
+}
+
+    #submission-controls #loader {
+        height: 35px;
+        display: none;
+    }
+
+#confirmation-area {
+    font-size: small;
+    margin-top: 0;
 }

@@ -15,11 +15,26 @@ const dbStores = {
     mostRecentViewedFact: {
         name: "MostRecentViewedFact",
         keyPath: "id"
+    },
+    factSubmissions: {
+        name: "FactSubmissions",
+        keyPath: "id"
     }
 };
 
 //Functions
-const getQueryParameterByName = function(name, url) {
+const postData = function (url, data) {
+    const requestSetup = {
+        body: JSON.stringify(data),
+        cache: 'no-cache',
+        headers: { 'content-type': 'application/json' },
+        method: 'POST'
+    };
+
+    return fetch(url, requestSetup).then(response => response.json());
+};
+
+const getQueryParameterByName = function (name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -27,7 +42,7 @@ const getQueryParameterByName = function(name, url) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
+};
 
 const highlightPageIcon = function () {
     const urlPath = window.location.pathname.toLowerCase();
@@ -66,6 +81,7 @@ const loadIndexedDb = function () {
         isDbUpdated &= ensureDbStoreCreation(db, dbStores.userSettings.name, dbStores.userSettings.keyPath);
         isDbUpdated &= ensureDbStoreCreation(db, dbStores.facts.name, dbStores.facts.keyPath);
         isDbUpdated &= ensureDbStoreCreation(db, dbStores.mostRecentViewedFact.name, dbStores.mostRecentViewedFact.keyPath);
+        isDbUpdated &= ensureDbStoreCreation(db, dbStores.factSubmissions.name, dbStores.factSubmissions.keyPath, true);
 
         isDbUpdated
             ? console.log(`Database updated to version '{${indexedDbVersion}}'`)
@@ -75,16 +91,16 @@ const loadIndexedDb = function () {
     open.onerror = (error) => {
         console.error(error);
     };
-}
+};
 
-const ensureDbStoreCreation = function (db, storeName, keyPath) {
+const ensureDbStoreCreation = function (db, storeName, keyPath, autoincrement) {
     if (!db.objectStoreNames.contains(storeName)) {
-        db.createObjectStore(storeName, { keyPath: keyPath});
+        db.createObjectStore(storeName, { keyPath: keyPath, autoIncrement: autoincrement });
         return true;
     }
 
     return false;
-}
+};
 
 const loadNotificationsIcon = function () {
 

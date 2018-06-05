@@ -1,4 +1,5 @@
 ﻿using ChuckNorris.Api.Entities;
+using ChuckNorris.Api.Models;
 using ChuckNorris.Api.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -52,26 +53,20 @@ namespace ChuckNorris.Api.Controllers
         /// <summary>
         /// Creates a submission for review and approval
         /// </summary>
-        /// <param name="description"></param>
+        /// <param name="submissionApproval"></param>
         [HttpPost(Name = nameof(AddSubmission))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, typeof(void))]
         [SwaggerResponse(StatusCodes.Status422UnprocessableEntity, typeof(string), Description = "When description length is greater than allowed")]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, typeof(string), Description = "Not your fault")]
         [SwaggerResponse(StatusCodes.Status201Created, typeof(Fact), Description = "Representation of the newly created submission")]
-        public IActionResult AddSubmission([FromBody]string description)
+        public IActionResult AddSubmission([FromBody] SubmissionApproval submissionApproval)
         {
-            if (string.IsNullOrWhiteSpace(description))
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            if (description.Length > Fact.DescriptionMaxLength)
-            {
-                ModelState.AddModelError("Description", $"Max length is {Fact.DescriptionMaxLength}");
-                return new ObjectResult(StatusCodes.Status422UnprocessableEntity);
-            }
-
-            var newSubmission = new Submission { Approved = false, FactDescription = description };
+            var newSubmission = new Submission { Approved = false, FactDescription = submissionApproval.Description };
             _submissionRepo.CreateSubmussion(newSubmission);
 
             if (!_submissionRepo.Complete())
@@ -111,7 +106,7 @@ namespace ChuckNorris.Api.Controllers
             {
                 throw new Exception("Creating submission failed on save");
             }
-
+            
             return NoContent();
         }
 

@@ -66,8 +66,8 @@
       "FrontEnd/js/submissions.js"
     ],
     "minify": {
-      "enabled": true,
-      "renameLocals": true
+      "enabled": false,
+      "renameLocals": false
     },
     "sourceMap": false
   },
