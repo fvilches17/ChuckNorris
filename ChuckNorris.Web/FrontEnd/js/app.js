@@ -181,11 +181,19 @@ const setOfflineTheme = function () {
 };
 
 const setOnlineTheme = function () {
+    //Set Theme
     $("html").removeClass("offline");
     $("body").removeClass("offline");
     $("#main-nav").removeClass("offline");
     $("main").removeClass("offline");
     $("#offline-icon").hide();
+
+    //Register Sync
+    if ("serviceWorker" in navigator && "SyncManager") {
+        navigator.serviceWorker.ready.then(sw => { return sw.sync.register("sync-factSubmissions"); });
+    } else {
+        //TODO
+    }
 };
 
 const registerServiceWorker = function () {
@@ -304,7 +312,6 @@ $(document).ready(function () {
         //loadNotificationsIcon();
     }
 
-
     notificationsIcon.on("click", processNotificationPermissions);
 
     //if (Notification.permission !== "granted") {
@@ -316,4 +323,7 @@ $(document).ready(function () {
     //} else {
     //    toggleNotificationsIcon();
     //}
+
+
+
 });
