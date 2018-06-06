@@ -9,15 +9,18 @@ using NSwag;
 using NSwag.AspNetCore;
 using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.AspNetCore.Http;
 
 namespace ChuckNorris.Api
 {
     public class Startup
     {
+        private readonly IHostingEnvironment _environment;
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
+            _environment = environment;
             Configuration = configuration;
         }
 
@@ -28,11 +31,16 @@ namespace ChuckNorris.Api
             services.AddScoped<ISubmissionRepository, SubmissionRepository>();
             services.AddMvc();
             services.AddCors();
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status301MovedPermanently;
+                options.HttpsPort = _environment.IsEnvironment("local") ? 44312 : 443;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppContext appContext)
         {
-            if (env.IsDevelopment())
+            if (env.IsEnvironment("localhost"))
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -56,7 +64,7 @@ namespace ChuckNorris.Api
                 {
                     document.BasePath = "/";
                     document.Schemes = new List<SwaggerSchema> { SwaggerSchema.Http, SwaggerSchema.Https };
-                    document.Host = env.IsDevelopment() ? "localhost:5000" : "http://chucknorris-api.azurewebsites.net";
+                    document.Host = env.IsEnvironment("localhost") ? "localhost:5000" : "https://chucknorris-api.azurewebsites.net";
                 };
 
                 settings.SwaggerUiRoute = "/swagger/ui";

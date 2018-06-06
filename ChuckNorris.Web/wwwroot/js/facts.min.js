@@ -189,10 +189,10 @@ const getFactFromIndexedDb = function (factId) {
         request.onsuccess = () => {
             const fact = request.result;
             if (!fact) {
-                if (navigator.onLine) {
-                    loadFactFromApi(factId);
-                } else {
+                if (!navigator.onLine) {
                     loadChuckFact(1);
+                } else {
+                    loadFactFromApi(factId);
                 }
             } else {
                 $("#loader").hide();

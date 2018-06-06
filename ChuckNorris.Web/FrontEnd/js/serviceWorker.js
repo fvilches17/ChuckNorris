@@ -1,4 +1,4 @@
-﻿const version = "v4.0";
+﻿const version = "v4.9";
 const resourcesToCache = [
     //VIEWS
     "/",

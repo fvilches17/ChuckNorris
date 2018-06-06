@@ -23,7 +23,10 @@ const submitFactForApproval = function (event) {
         const data = { description: factDescription };
         postData(url, data)
             .then(handleSubmissionSuccess)
-            .catch(error => console.error(error))
+            .catch(error => {
+                console.error(error);
+                $("#confirmation-area").text(errorMessage);
+            })
             .finally(() => { $("#loader").hide(); });
     }
 };
