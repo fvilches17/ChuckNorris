@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using Newtonsoft.Json;
+using WebPush;
 
 namespace ChuckNorris.Api.Controllers
 {
@@ -16,11 +19,13 @@ namespace ChuckNorris.Api.Controllers
     {
         private readonly IFactRepository _factRepo;
         private readonly ISubmissionRepository _submissionRepo;
+        private readonly ISubscriptionsRepository _subscriptionsRepository;
 
-        public SubmissionsController(IFactRepository factRepo, ISubmissionRepository submissionRepo)
+        public SubmissionsController(IFactRepository factRepo, ISubmissionRepository submissionRepo, ISubscriptionsRepository _subscriptionsRepository)
         {
             _factRepo = factRepo;
             _submissionRepo = submissionRepo;
+            this._subscriptionsRepository = _subscriptionsRepository;
         }
 
         /// <summary>
@@ -102,13 +107,46 @@ namespace ChuckNorris.Api.Controllers
                 throw new Exception("Approving submission failed on save");
             }
 
-            _factRepo.Add(new Fact { Description = submissionToApprove.FactDescription });
+            var newFact = new Fact {Description = submissionToApprove.FactDescription};
+
+            _factRepo.Add(newFact);
             if (!_factRepo.Complete())
             {
                 throw new Exception("Creating submission failed on save");
             }
-            
+
+            NotifyUsersOfNewFact(newFact.Id, newFact.Description);
+
             return NoContent();
+        }
+
+
+        private void NotifyUsersOfNewFact(int factId, string factDescription)
+        {
+            var vapidDetails = new VapidDetails(
+                subject: @"mailto:franciscov@datacom.co.nz",
+                publicKey: "BMvHf5RXbsME4s8p2iGh_rfazldy2PbaSvo1l-REog7e-PKBmtDPsSBA5ykmTVSH6F9D0JIsDL9dwReNwqewBDg",
+                privateKey: "Z5SLGu-OlHvpH-C2D8uL3WnklEotnhWZVEsmYOo8jZQ");
+
+            var subscriptions = _subscriptionsRepository.GetAll();
+            var payload = JsonConvert.SerializeObject(new
+            {
+                factid = factId,
+                newfact = factDescription
+            });
+
+            var webPushClient = new WebPushClient();
+            foreach (var subscription in subscriptions.Select(s => new PushSubscription(s.Endpoint, s.p256dh, s.auth)))
+            {
+                try
+                {
+                    webPushClient.SendNotification(subscription, payload, vapidDetails);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
         }
 
 
