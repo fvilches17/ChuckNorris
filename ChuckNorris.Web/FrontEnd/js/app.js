@@ -1,5 +1,8 @@
 ﻿//Globals
+let chuckServiceWorker = undefined;
+
 const notificationsIcon = $("#notification-icon");
+const chuckSubscriptionPublicKey = "BMvHf5RXbsME4s8p2iGh_rfazldy2PbaSvo1l-REog7e-PKBmtDPsSBA5ykmTVSH6F9D0JIsDL9dwReNwqewBDg";
 const indexedDb = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
 const indexedDbName = "ChuckNorris";
 const indexedDbVersion = 3;
@@ -169,7 +172,7 @@ const toggleNotificationsIcon = function () {
     };
 };
 
-const setOfflineTheme = function() {
+const setOfflineTheme = function () {
     $("html").addClass("offline");
     $("body").addClass("offline");
     $("#main-nav").addClass("offline");
@@ -177,7 +180,7 @@ const setOfflineTheme = function() {
     $("#offline-icon").show();
 };
 
-const setOnlineTheme = function() {
+const setOnlineTheme = function () {
     $("html").removeClass("offline");
     $("body").removeClass("offline");
     $("#main-nav").removeClass("offline");
@@ -185,13 +188,82 @@ const setOnlineTheme = function() {
     $("#offline-icon").hide();
 };
 
-const registerServiceWorker = function() {
+const registerServiceWorker = function () {
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker
             .register("/serviceWorker.min.js")
             .then(console.log("SW Registered"))
             .catch(err => console.error(`There was a problem registering the service worker: ${err}`));
     }
+};
+
+const urlB64ToUint8Array = function (base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding)
+        .replace(/\-/g, '+')
+        .replace(/_/g, '/');
+
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
+
+const processNotificationPermissions = function () {
+    chuckServiceWorker.pushManager.getSubscription()
+        .then(s => {
+            //Unsibscribe
+            if (s !== null) {
+                s.unsubscribe();
+                const request = {
+                    method: "DELETE",
+                    credentials: "omit"
+                };
+
+                fetch(`${chuckNorrisAppSettings.apiBaseUrl}/subscriptions/${localStorage.userEmail}`, request)
+                    .then(greyOutNotificationsIcon());
+            } else {
+                Notification.requestPermission()
+                    .then(permission => {
+                        if (permission !== "granted") {
+                            notificationsIcon.hide();
+                            return false;
+                        }
+
+                        return true;
+                    })
+                    .then(isPermissionGranted => {
+                        if (isPermissionGranted) {
+                            chuckServiceWorker.pushManager
+                                .subscribe({
+                                    userVisibleOnly: true,
+                                    applicationServerKey: urlB64ToUint8Array(chuckSubscriptionPublicKey)
+                                })
+                                .then(subscription => {
+                                    const payloadObj = {
+                                        userName: localStorage.userEmail,
+                                        subscription: subscription
+                                    };
+                                    const request = {
+                                        headers: { "content-type": "application/json" },
+                                        method: "POST",
+                                        credentials: "omit",
+                                        body: JSON.stringify(payloadObj)
+                                    };
+                                    fetch(`${chuckNorrisAppSettings.apiBaseUrl}/subscriptions`, request);
+                                })
+                                .then(res => {
+                                    highlightNotificationsIcon();
+                                })
+                                .catch(err => console.log(err));
+                        }
+                    });
+            }
+
+        }).catch(err => console.log(err));
 };
 
 $(document).ready(function () {
@@ -204,28 +276,44 @@ $(document).ready(function () {
 
     window.addEventListener('online', setOnlineTheme);
     window.addEventListener('offline', setOfflineTheme);
-        
+
     highlightPageIcon();
     loadIndexedDb();
 
-    //Check if browser supports notifications
-    if (!Notification) {
-        notificationsIcon.hide();
-        return;
+    //Get User Name
+    while (localStorage.userEmail === undefined || localStorage.userEmail === "null") {
+        localStorage.userEmail = prompt("Email");
     }
 
-    //Highlight notifications button to indicate they are allowed
-    loadNotificationsIcon();
+    //Check if browser supports push notifications
+    if ("serviceWorker" in navigator && "PushManager" in window) {
 
-    notificationsIcon.on("click", function () {
-        if (Notification.permission !== "granted") {
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
-                    toggleNotificationsIcon();
-                }
-            });
-        } else {
-            toggleNotificationsIcon();
-        }
-    });
+        if (Notification.permission === "denied") return;
+        notificationsIcon.show();
+
+        navigator.serviceWorker.ready.then(sw => {
+            chuckServiceWorker = sw;
+            sw.pushManager.getSubscription()
+                .then(s => {
+                    const isSubscribed = s !== null;
+                    isSubscribed ? highlightNotificationsIcon() : greyOutNotificationsIcon();
+                })
+                .catch(err => console.log(err));
+        });
+
+        //loadNotificationsIcon();
+    }
+
+
+    notificationsIcon.on("click", processNotificationPermissions);
+
+    //if (Notification.permission !== "granted") {
+    //    Notification.requestPermission().then(permission => {
+    //        if (permission === "granted") {
+    //            toggleNotificationsIcon();
+    //        }
+    //    });
+    //} else {
+    //    toggleNotificationsIcon();
+    //}
 });

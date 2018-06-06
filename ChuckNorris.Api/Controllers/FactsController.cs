@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Linq;
+using Newtonsoft.Json;
+using WebPush;
 
 namespace ChuckNorris.Api.Controllers
 {
@@ -14,10 +16,12 @@ namespace ChuckNorris.Api.Controllers
     public class FactsController : Controller
     {
         private readonly IFactRepository _factRepo;
+        private readonly ISubscriptionsRepository _subscriptionsRepository;
 
-        public FactsController(IFactRepository factRepo)
+        public FactsController(IFactRepository factRepo, ISubscriptionsRepository subscriptionsRepository)
         {
             _factRepo = factRepo;
+            _subscriptionsRepository = subscriptionsRepository;
         }
 
         /// <summary>
@@ -78,6 +82,8 @@ namespace ChuckNorris.Api.Controllers
                 throw new Exception("Creating fact failed on save");
             }
 
+            NotifyUsersOfNewFact(factId: newFact.Id, factDescription: description); //TODO-FV: make this call ASYNC
+
             return CreatedAtRoute(routeName: nameof(GetFactById), routeValues: new { newFact.Id }, value: newFact);
         }
 
@@ -106,6 +112,35 @@ namespace ChuckNorris.Api.Controllers
             }
 
             return NoContent();
+        }
+
+
+        private void NotifyUsersOfNewFact(int factId, string factDescription)
+        {
+            var vapidDetails = new VapidDetails(
+                subject: @"mailto:franciscov@datacom.co.nz",
+                publicKey: "BMvHf5RXbsME4s8p2iGh_rfazldy2PbaSvo1l-REog7e-PKBmtDPsSBA5ykmTVSH6F9D0JIsDL9dwReNwqewBDg",
+                privateKey: "Z5SLGu-OlHvpH-C2D8uL3WnklEotnhWZVEsmYOo8jZQ");
+
+            var subscriptions = _subscriptionsRepository.GetAll();
+            var payload = JsonConvert.SerializeObject(new
+            {
+                factid = factId,
+                newfact = factDescription
+            });
+
+            var webPushClient = new WebPushClient();
+            foreach (var subscription in subscriptions.Select(s => new PushSubscription(s.Endpoint, s.p256dh, s.auth)))
+            {
+                try
+                {
+                    webPushClient.SendNotification(subscription, payload, vapidDetails);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
         }
     }
 }

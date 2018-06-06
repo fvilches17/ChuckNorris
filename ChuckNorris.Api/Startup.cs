@@ -29,6 +29,7 @@ namespace ChuckNorris.Api
             services.AddDbContext<AppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IFactRepository, FactRepository>();
             services.AddScoped<ISubmissionRepository, SubmissionRepository>();
+            services.AddScoped<ISubscriptionsRepository, SubscriptionsRepository>();
             services.AddMvc();
             services.AddCors();
             services.AddHttpsRedirection(options =>
@@ -64,7 +65,7 @@ namespace ChuckNorris.Api
                 {
                     document.BasePath = "/";
                     document.Schemes = new List<SwaggerSchema> { SwaggerSchema.Http, SwaggerSchema.Https };
-                    document.Host = env.IsEnvironment("localhost") ? "localhost:5000" : "https://chucknorris-api.azurewebsites.net";
+                    document.Host = env.IsEnvironment("localhost") ? "localhost:44312" : "https://chucknorris-api.azurewebsites.net";
                 };
 
                 settings.SwaggerUiRoute = "/swagger/ui";

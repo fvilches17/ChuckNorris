@@ -136,6 +136,7 @@ sup {
     }
 
 #notification-icon {
+    display: none;
     bottom: 50px;
     left: 3%;
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */

@@ -10,6 +10,7 @@ namespace ChuckNorris.Api
 
         public DbSet<Fact> Facts { get; set; }
         public DbSet<Submission> Submissions { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
 
         public void EnsureSeedForContext()
         {
