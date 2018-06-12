@@ -48,13 +48,13 @@ const highlightPageIcon = function () {
     const urlPath = window.location.pathname.toLowerCase();
     const className = "selected-icon";
 
-    if (urlPath.startsWith("/facts")) {
+    if (urlPath.startsWith("/facts") || urlPath.endsWith(".net")) {
         $("#icon-home").addClass(className);
     } else if (urlPath.startsWith("/favorites")) {
         $("#icon-favorites").addClass(className);
     } else if (urlPath.startsWith("/bio")) {
         $("#icon-chuck").addClass(className);
-    } else if (urlPath.startsWith("/contact")) {
+    } else if (urlPath.startsWith("/submissions")) {
         $("#icon-contact").addClass(className);
     }
 };
